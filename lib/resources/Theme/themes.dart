@@ -6,9 +6,9 @@ class Themes {
   static final ThemeData lightTheme=ThemeData(
     scaffoldBackgroundColor: ExternalColors.offwhite,
     primaryColor: ExternalColors.darkblue,
-    textTheme:TextTheme(titleLarge: TextStyle(color: ExternalColors.offwhite,fontSize: 60, fontFamily: 'Poppins', ),
-    // bodyLarge:TextStyle(color: ExternalColors.offwhite,fontSize: 20, fontFamily: 'Poppins', decorationColor: Colors.grey, backgroundColor: ExternalColors.lightgreen)
-    ),
+    // textTheme:TextTheme(titleLarge: TextStyle(color: ExternalColors.offwhite,fontSize: 60, fontFamily: 'Poppins', ),
+    // // bodyLarge:TextStyle(color: ExternalColors.offwhite,fontSize: 20, fontFamily: 'Poppins', decorationColor: Colors.grey, backgroundColor: ExternalColors.lightgreen)
+    // ),
     colorScheme:ColorScheme(
     primary: ExternalColors.darkblue,
     secondary: ExternalColors.lightgreen, // Sets the darker variant of the secondary color

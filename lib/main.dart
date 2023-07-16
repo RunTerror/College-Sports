@@ -10,12 +10,14 @@ import 'package:sports_application/view_model/admin_controller.dart';
 import 'package:sports_application/view_model/announcement_data.dart';
 import 'package:sports_application/view_model/complaints_provider.dart';
 import 'package:sports_application/view_model/firestore_methos.dart';
+import 'package:sports_application/view_model/get_chatrooms.dart';
+import 'package:sports_application/view_model/get_members.dart';
 import 'package:sports_application/view_model/get_users.dart';
 import 'package:sports_application/view_model/profile_controller.dart';
 import 'package:sports_application/view_model/profile_provider.dart';
+import 'package:sports_application/view_model/selected_members.dart';
 import 'package:sports_application/view_model/theme_provider.dart';
 import 'package:sports_application/view_model/achievements_picker.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,9 +48,13 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<AchivementProvider>(
               create: (context) => AchivementProvider()),
           ChangeNotifierProvider(create: (context) => AnnouncementProvider()),
-          ChangeNotifierProvider(create: (context)=> ProfileProvider()),
-          ChangeNotifierProvider(create: (context)=> GetUsers()),
-          ChangeNotifierProvider(create: (context)=> AdminProfileController())
+          ChangeNotifierProvider(create: (context) => ProfileProvider()),
+          ChangeNotifierProvider(create: (context) => GetUsers()),
+          ChangeNotifierProvider(create: (context) => AdminProfileController()),
+          ChangeNotifierProvider(create: (context) => GetMembersProvider()),
+          ChangeNotifierProvider(create: (context)=> SelectedMembers()),
+          ChangeNotifierProvider(create: (context)=> ChatRoomsProvider())
+
         ],
         builder: (context, child) {
           return MaterialApp(
