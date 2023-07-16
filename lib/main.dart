@@ -16,6 +16,7 @@ import 'package:sports_application/view_model/profile_provider.dart';
 import 'package:sports_application/view_model/theme_provider.dart';
 import 'package:sports_application/view_model/achievements_picker.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
