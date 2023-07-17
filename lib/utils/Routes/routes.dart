@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
-import 'package:sports_application/view/access_screen.dart';
+import 'package:sports_application/view/adminprofile/access_screen.dart';
 import 'package:sports_application/view/achievement/achievement_detail.dart';
 import 'package:sports_application/view/achievement/add_achievement.dart';
 import 'package:sports_application/view/adminprofile/admin_profile_form.dart';
