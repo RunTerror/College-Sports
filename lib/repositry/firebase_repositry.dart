@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
 import '../utils/utils.dart';
 
 class FirebaseAuthMethods {
@@ -34,11 +35,15 @@ class FirebaseAuthMethods {
               .collection('Users')
               .doc(_auth.currentUser?.uid)
               .set({
+            "uid": FirebaseAuth.instance.currentUser!.uid,
             "position": 'user',
             "email": email,
             "name": name,
           });
         });
+
+        await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
+
       } else {
         await _auth
             .createUserWithEmailAndPassword(email: email, password: password)
@@ -47,11 +52,13 @@ class FirebaseAuthMethods {
               .collection('Users')
               .doc(_auth.currentUser?.uid)
               .set({
+            "uid": FirebaseAuth.instance.currentUser!.uid,
             "position": 'admin',
             "email": email,
             "name": name,
           });
         });
+         await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
       }
     } on FirebaseAuthException catch (e) {
       Utils.snackBar(e.message!, context);

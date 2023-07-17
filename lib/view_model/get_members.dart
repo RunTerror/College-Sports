@@ -44,6 +44,7 @@ class GetMembersProvider with ChangeNotifier {
         .doc(groupId)
         .collection('chats')
         .add({
+      "time": FieldValue.serverTimestamp(),
       "message": "$name Created This Group.",
       "type": "notify",
     });

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +17,12 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   onSendMessage() {
     if (_message.text.isNotEmpty) {
       Map<String, dynamic> _messageData = {
-        "sendBy": FirebaseAuth.instance.currentUser!.email,
+        "sendBy": FirebaseAuth.instance.currentUser!.displayName,
         "message": _message.text,
         "type": "text",
         "time": FieldValue.serverTimestamp(),
       };
+      print(_messageData);
       _message.clear();
 
       FirebaseFirestore.instance
@@ -109,12 +112,13 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   }
 
   Widget messageTile(Size size, Map<String, dynamic> chatMap) {
+    print(FirebaseAuth.instance.currentUser!.displayName);
     return Builder(builder: (_) {
       if (chatMap['type'] == "text") {
         return Container(
           width: size.width,
           alignment:
-              chatMap['sendBy'] == FirebaseAuth.instance.currentUser!.email
+              chatMap['sendBy'] == FirebaseAuth.instance.currentUser!.displayName
                   ? Alignment.centerRight
                   : Alignment.centerLeft,
           child: Container(

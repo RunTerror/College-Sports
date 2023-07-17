@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sports_application/repositry/firebase_repositry.dart';
 import 'package:sports_application/view/auth/Landing/landing_screen.dart';
 import 'package:sports_application/view/auth/verification/verification.dart';
+import 'package:sports_application/view/home_screen.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
@@ -27,7 +28,7 @@ class _WrapperState extends State<Wrapper> {
           );
         }
         if (snapshot.hasData) {
-          return const VerificationScreen();
+          return const HomeScreen();
         } else {
           return const LandingScreen();
         }
