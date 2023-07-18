@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
+import 'package:sports_application/view/achievement/achievement_detail.dart';
+import 'package:sports_application/view/achievement/sports_achievements.dart';
 import 'package:sports_application/view/adminprofile/admin_profile_form.dart';
 import 'package:sports_application/view/announcements/announcements_detail.dart';
 import 'package:sports_application/view/complaints/add_complaint.dart';
@@ -88,6 +90,22 @@ class Routes {
             },
           );
         }
+      case RouteNames.sportsDetail:
+        if (arguments is Map<String, dynamic>) {
+          return MaterialPageRoute(
+              builder: (context) => AchievementDetail(
+                achievementdetail: arguments,
+                  ));
+        } else {
+          return MaterialPageRoute(
+            builder: (context) {
+              return const Scaffold(
+                body: Center(child: Text("No routes defined")),
+              );
+            },
+          );
+        }
+      
 
       default:
         return MaterialPageRoute(builder: (_) {

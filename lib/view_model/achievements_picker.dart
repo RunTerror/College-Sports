@@ -12,6 +12,26 @@ class AchievementPicker with ChangeNotifier {
 
   File? _poster;
   File? get poster => _poster;
+   List<String> _members = [];
+  List<String> get members => _members;
+
+  addMembers(String member) {
+    _members.add(member);
+    notifyListeners();
+  }
+
+  removeMember(String membername) {
+    for (int i = 0; i < _members.length; i++) {
+      if (members[i] == membername) {
+        _members.removeAt(i);
+      }
+    }
+    notifyListeners();
+  }
+  removerMembers(){
+    _members=[];
+    notifyListeners();
+  }
 
   selectImage(BuildContext context) {
     showDialog(
@@ -69,10 +89,16 @@ class AchievementPicker with ChangeNotifier {
     );
   }
 
+  removerImage(){
+    _img=null;
+    notifyListeners();
+  }
+
   pickAchievement(ImageSource source) async {
     final pickedFile = await imagePicke.pickImage(source: source);
     if (pickedFile != null) {
       _img = File(pickedFile.path);
+      
     }
     notifyListeners();
   }
@@ -98,9 +124,12 @@ class AchievementPicker with ChangeNotifier {
     );
     await Future.value(uploadTask);
     final newUrl = await storageRef.getDownloadURL();
-    FirebaseFirestore.instance.collection(sport).doc(achievementid).update({
-      "image": newUrl,
-    });
+    FirebaseFirestore.instance
+        .collection("Sports Achievements")
+        .doc(sport)
+        .collection('achievements')
+        .doc(achievementid)
+        .update({"image": newUrl});
   }
 
   uploadPickedPoster(String announcementId) async {
@@ -119,4 +148,6 @@ class AchievementPicker with ChangeNotifier {
       "image": newUrl,
     });
   }
+
+
 }

@@ -23,4 +23,6 @@ class RouteNames {
   static const detailedComplaint='complaint-details';
   static const server='server-screen';
   static const announcementdetail='announcement-detail';
+  static const sportsDetail='sports-detail';
+
 }

@@ -1,12 +1,14 @@
 import 'dart:core';
-import 'package:date_format/date_format.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/resources/Colors/colors.dart';
 import 'package:sports_application/resources/Components/profile_textfield.dart';
-import 'package:sports_application/view/adminprofile/preview_screen.dart';
+import 'package:sports_application/utils/utils.dart';
 import 'package:sports_application/view_model/achievements_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class AddAchievement extends StatefulWidget {
   final String sport;
@@ -27,7 +29,7 @@ class _AddAchievementState extends State<AddAchievement> {
   String team = '';
   String position = '';
   String? text;
-  String? teamMembersCount;
+  final uid = const Uuid();
 
   @override
   void initState() {
@@ -74,8 +76,13 @@ class _AddAchievementState extends State<AddAchievement> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: theme.colorScheme.secondary,
-      ),
+          backgroundColor: theme.colorScheme.secondary,
+          leading: IconButton(
+            icon: const Icon(Icons.cancel),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         width: w,
@@ -88,7 +95,7 @@ class _AddAchievementState extends State<AddAchievement> {
               builder: (context, provider, child) {
                 return InkWell(
                   onTap: () {
-                    provider.showBox(context);
+                    provider.selectImage(context);
                   },
                   child: Container(
                     height: w / 1.1,
@@ -143,14 +150,6 @@ class _AddAchievementState extends State<AddAchievement> {
               height: 20,
             ),
             ProfileField(
-                maxLine: 3,
-                namecontroller: descriptionController,
-                hintText: "Description",
-                iconData: Icons.description),
-            const SizedBox(
-              height: 20,
-            ),
-            ProfileField(
                 namecontroller: positionController,
                 hintText: "Position",
                 iconData: Icons.group),
@@ -158,11 +157,110 @@ class _AddAchievementState extends State<AddAchievement> {
               height: 20,
             ),
             ProfileField(
-                namecontroller: positionController,
+                namecontroller: teamController,
                 hintText: "Name",
                 iconData: Icons.person),
+            TextButton(
+                onPressed: () {
+                  if (teamController.text.trim().isNotEmpty) {
+                    provider.addMembers(teamController.text.trim());
+                    teamController.clear();
+                  }
+                },
+                child: const Text("Add member")),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
+              height: h / 5,
+              width: w,
+              child: ListView.builder(
+                itemCount: provider.members.length,
+                itemBuilder: (context, index) {
+                  return provider.members.isEmpty
+                      ? const Text("Please Add Members")
+                      : ListTile(
+                          onTap: () {
+                            provider
+                                .removeMember(provider.members[index]);
+                            print(provider.members.length);
+                            setState(() {});
+                          },
+                          title: Text(provider.members[index]),
+                          trailing: const Icon(Icons.cancel),
+                        );
+                },
+              ),
+            ),
             const SizedBox(
               height: 20,
+            ),
+            ProfileField(
+                maxLine: 3,
+                namecontroller: descriptionController,
+                hintText: "Description",
+                iconData: Icons.description),
+            const SizedBox(
+              height: 10,
+            ),
+            InkWell(
+              onTap: () async {
+                if (provider.img == null) {
+                  Utils.flushbarErrorMessage("Select winning image", context);
+                } else if (eventController.text.isEmpty) {
+                  Utils.flushbarErrorMessage(
+                      "Please enter event name", context);
+                } else if (year.isEmpty) {
+                  Utils.flushbarErrorMessage("Please choose year", context);
+                } else if (positionController.text.isEmpty) {
+                  Utils.flushbarErrorMessage("Please enter position", context);
+                } else if (provider.members.isEmpty) {
+                  Utils.flushbarErrorMessage(
+                      "Please add team members", context);
+                } else if (descriptionController.text.isEmpty) {
+                  Utils.flushbarErrorMessage("Please add description", context);
+                } else {
+                  try {
+                    String uniqueid = uid.v4();
+                    await FirebaseFirestore.instance
+                        .collection("Sports Achievements")
+                        .doc(widget.sport)
+                        .collection('achievements')
+                        .doc(uniqueid)
+                        .set({
+                      "event name": eventController.text.trim(),
+                      "year": year,
+                      "position": positionController.text.trim(),
+                      "team": provider.members,
+                      "description": descriptionController.text.trim()
+                    }).then((value) => Utils.toastMessage(
+                            "Congratulation new Achievement added!"));
+                            if(context.mounted){
+                              Navigator.pop(context);
+                            }
+                    provider.uploadPickedImg(widget.sport, uniqueid);
+                    provider.removerMembers();
+                    provider.removerImage();
+                  } on FirebaseAuthException catch (e) {
+                    Utils.snackBar(e.message!, context);
+                  }
+                }
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: h / 15,
+                width: w,
+                decoration: BoxDecoration(
+                    color: ExternalColors.lightgreen,
+                    borderRadius: const BorderRadius.all(Radius.circular(5))),
+                child: const Text("Post"),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
           ],
         ),

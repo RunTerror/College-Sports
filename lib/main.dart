@@ -18,6 +18,7 @@ import 'package:sports_application/view_model/profile_provider.dart';
 import 'package:sports_application/view_model/selected_members.dart';
 import 'package:sports_application/view_model/theme_provider.dart';
 import 'package:sports_application/view_model/achievements_picker.dart';
+import 'package:sports_application/view_model/winning_members.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +54,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => AdminProfileController()),
           ChangeNotifierProvider(create: (context) => GetMembersProvider()),
           ChangeNotifierProvider(create: (context)=> SelectedMembers()),
-          ChangeNotifierProvider(create: (context)=> ChatRoomsProvider())
+          ChangeNotifierProvider(create: (context)=> ChatRoomsProvider()),
+          ChangeNotifierProvider(create: (context)=> WinningMembers())
 
         ],
         builder: (context, child) {
