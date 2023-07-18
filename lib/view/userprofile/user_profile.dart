@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sports_application/repositry/firebase_repositry.dart';
 import 'package:sports_application/resources/Components/profile_widget.dart';
 import 'package:sports_application/utils/utils.dart';
 
@@ -17,10 +18,7 @@ class _UserProfileState extends State<UserProfile> {
   TextEditingController sportsController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    String branch;
-    String year;
-    String sports;
-
+    var isLoading = false;
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     var theme = Theme.of(context);
@@ -77,13 +75,22 @@ class _UserProfileState extends State<UserProfile> {
                     Utils.flushbarErrorMessage(
                         "Please enter your sports", context);
                   } else {
+                    setState(() {
+                      isLoading = true;
+                    });
                     FirebaseFirestore.instance
                         .collection('Users')
-                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .doc(context.read<FirebaseAuthMethods>().user.uid)
                         .update({
                       "branch": branchController.text,
                       "batch": yearController.text,
                       "sports": sportsController.text
+                    }).then((value) {
+                      setState(() {
+                        isLoading = false;
+                      });
+                      Navigator.of(context).pop();
+                      Utils.toastMessage("Updated");
                     });
                   }
                 },
@@ -97,10 +104,12 @@ class _UserProfileState extends State<UserProfile> {
                           width: 1, color: theme.colorScheme.primary),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(10))),
-                  child: const Text(
-                    "Submit",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: isLoading == false
+                      ? const Text(
+                          "Submit",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      : const CircularProgressIndicator(),
                 ),
               )
             ],

@@ -28,7 +28,11 @@ class _WrapperState extends State<Wrapper> {
           );
         }
         if (snapshot.hasData) {
-          return const HomeScreen();
+          if (FirebaseAuth.instance.currentUser!.emailVerified) {
+            return const HomeScreen();
+          } else {
+            return const VerificationScreen();
+          }
         } else {
           return const LandingScreen();
         }

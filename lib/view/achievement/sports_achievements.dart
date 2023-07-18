@@ -21,7 +21,7 @@ class _SportsAchievementsState extends State<SportsAchievements> {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
-    final achievementProviderInstance =
+    final provider =
         Provider.of<AchivementProvider>(context);
     return Scaffold(
         appBar: AppBar(
@@ -132,7 +132,7 @@ class _SportsAchievementsState extends State<SportsAchievements> {
             }
             return const Text("Null");
           },
-          stream: achievementProviderInstance.getAchievement(widget.title),
+          stream: provider.getAchievement(widget.title),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
@@ -147,7 +147,7 @@ class _SportsAchievementsState extends State<SportsAchievements> {
               if (mounted) {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return AddAchievemen(sport: widget.title);
+                  return AddAchievement(sport: widget.title);
                 }));
               }
             }

@@ -1,6 +1,4 @@
 
-import 'package:sports_application/view/achievement/achievement_detail.dart';
-import 'package:sports_application/view/complaints/add_complaint.dart';
 
 class RouteNames {
   static const emaillogin='email-login-screen';
@@ -21,4 +19,8 @@ class RouteNames {
   static const announcementform='announcement-form';
   static const amdinProfileform='admin-profile-form';
   static const accessScreen='manage-access';
+  static const userComplaint='user-complaints';
+  static const detailedComplaint='complaint-details';
+  static const server='server-screen';
+  static const announcementdetail='announcement-detail';
 }

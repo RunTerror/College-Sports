@@ -15,6 +15,7 @@ class Profile {
 }
 
 class FullUserProfile {
+  String? position;
   String? profile;
   String? name;
   String? email;
@@ -23,6 +24,7 @@ class FullUserProfile {
   String? batch;
   FullUserProfile(
       {required this.profile,
+      required this.position,
       required this.batch,
       required this.branch,
       required this.email,
@@ -30,6 +32,7 @@ class FullUserProfile {
       required this.sport});
 
   FullUserProfile.fromMap(Map<String, dynamic> json) {
+    position=json['position'];
     profile = json['profile'];
     name = json['name'];
     email = json['email'];

@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../resources/Components/user_complaint_card.dart';
 import '../../utils/Routes/route_names.dart';
-import '../../utils/utils.dart';
 import '../../view_model/complaints_provider.dart';
 
 class UserComplaintScreen extends StatefulWidget {
@@ -15,20 +13,12 @@ class UserComplaintScreen extends StatefulWidget {
 
 class _UserComplaintScreenState extends State<UserComplaintScreen>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-  @override
-  void initState() {
-    super.initState();
-    
-  }
-
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     return Scaffold(
-      
       body: Stack(children: [
         Container(
           height: double.maxFinite,
@@ -39,15 +29,7 @@ class _UserComplaintScreenState extends State<UserComplaintScreen>
             top: 30,
             child: IconButton(
                 onPressed: () {
-                  final email = FirebaseAuth.instance.currentUser!.email;
-                  if (email!.substring(email.length - 3, email.length) !=
-                      "com") {
-                    if (mounted) {
-                      Navigator.pushNamed(context, RouteNames.addComplaint);
-                    }
-                  } else {
-                    Utils.toastMessage("you are on admin post");
-                  }
+                  Navigator.pushNamed(context, RouteNames.addComplaint);
                 },
                 icon: const Icon(
                   Icons.add,
@@ -80,6 +62,7 @@ class _UserComplaintScreenState extends State<UserComplaintScreen>
                       } else if (snapshot.hasData) {
                         var data = snapshot.data;
                         return ListView.builder(
+
                             itemBuilder: (context, index) {
                               var com = data![index];
 
@@ -88,13 +71,21 @@ class _UserComplaintScreenState extends State<UserComplaintScreen>
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 10, left: 20, right: 20),
-                                    child: UserComplaintCard(
-                                        status: com.status!,
-                                        description: com.desciption!,
-                                        name: com.name!,
-                                        roll: com.roll!,
-                                        sport: com.sport!,
-                                        subject: com.subject!),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(context,
+                                            RouteNames.detailedComplaint,
+                                            arguments: com);
+                                      },
+                                      child: UserComplaintCard(
+                                          day: com.day!,
+                                          status: com.status!,
+                                          description: com.desciption!,
+                                          name: com.name!,
+                                          roll: com.roll!,
+                                          sport: com.sport!,
+                                          subject: com.subject!),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 20,

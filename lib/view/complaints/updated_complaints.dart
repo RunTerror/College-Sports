@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/resources/Components/user_complaint_card.dart';
+import 'package:sports_application/utils/Routes/route_names.dart';
 import 'package:sports_application/view_model/complaints_provider.dart';
 
 class UpdatedComplaints extends StatelessWidget {
@@ -22,12 +23,13 @@ class UpdatedComplaints extends StatelessWidget {
               final complaintsList = snapshot.data;
               final List<Complaint> filteredComplaints = [];
               for (Complaint complaint in complaintsList!) {
-                if (complaint.status == 'Done' || complaint.status=='Cancel') {
+                if (complaint.status == 'Done' ||
+                    complaint.status == 'Cancel') {
                   filteredComplaints.add(complaint);
                 }
               }
               if (filteredComplaints.isEmpty) {
-                return const Text("No Updated Complaints");
+                return  const Center(child:  Text("No Updated Complaints"));
               }
               return ListView.builder(
                 itemBuilder: (context, index) {
@@ -35,13 +37,20 @@ class UpdatedComplaints extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
-                    child: UserComplaintCard(
-                        status: com.status!,
-                        description: com.desciption!,
-                        name: com.name!,
-                        roll: com.roll!,
-                        sport: com.sport!,
-                        subject: com.subject!),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, RouteNames.detailedComplaint,arguments: com);
+                        
+                      },
+                      child: UserComplaintCard(
+                          day: com.day!,
+                          status: com.status!,
+                          description: com.desciption!,
+                          name: com.name!,
+                          roll: com.roll!,
+                          sport: com.sport!,
+                          subject: com.subject!),
+                    ),
                   );
                 },
                 itemCount: filteredComplaints.length,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sports_application/utils/Routes/route_names.dart';
 import 'package:sports_application/view/complaints/hold_complaint_card.dart';
 import '../../view_model/complaints_provider.dart';
 
@@ -28,7 +29,7 @@ class HoldComplaints extends StatelessWidget {
                   }
                 }
                 if (filteredComplaints.isEmpty) {
-                  return const  Center(child: Text("No Hold Complaints"));
+                  return const  Center(child: Text("No hold Complaints"));
                 }
                 return ListView.builder(
                   itemBuilder: (context, index) {
@@ -36,14 +37,20 @@ class HoldComplaints extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
-                      child: HoldComplaintCard(
-                        complaintId: com.complaintId!,
-                          status: com.status!,
-                          description: com.desciption!,
-                          name: com.name!,
-                          roll: com.roll!,
-                          sport: com.sport!,
-                          subject: com.subject!),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, RouteNames.detailedComplaint, arguments: com);
+                        },
+                        child: HoldComplaintCard(
+                          date: com.day!,
+                          complaintId: com.complaintId!,
+                            status: com.status!,
+                            description: com.desciption!,
+                            name: com.name!,
+                            roll: com.roll!,
+                            sport: com.sport!,
+                            subject: com.subject!),
+                      ),
                     );
                   },
                   itemCount: filteredComplaints.length,

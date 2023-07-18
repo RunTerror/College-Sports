@@ -9,8 +9,11 @@ class Complaint {
   String? subject;
   String? desciption;
   String? sport;
+  String? day;
+
   Complaint(
       {required this.roll,
+      required this.day,
       required this.complaintId,
       required this.status,
       required this.subject,
@@ -26,14 +29,15 @@ class Complaint {
     subject = json['subject'];
     desciption = json['complaint'];
     sport = json['sports'];
+    day=json['day'];
   }
 }
 
 class ComplaintProvider with ChangeNotifier {
   Stream<List<Complaint>>? getComplaints() {
-    final complaints = FirebaseFirestore.instance.collection('complaints');
+    final complaints = FirebaseFirestore.instance.collection('complaints').orderBy('time');
     var data = complaints.snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => Complaint.fromJson(doc.data())).toList());
+        snapshot.docs.map((doc) => Complaint.fromJson(doc.data())).toList().reversed.toList());
     return data;
   }
 }

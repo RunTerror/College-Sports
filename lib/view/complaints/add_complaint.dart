@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sports_application/utils/utils.dart';
 import 'package:uuid/uuid.dart';
 
@@ -77,8 +77,6 @@ class _AddComplaintState extends State<AddComplaint> {
                         "complete your complaint field", context);
                   } else {
                     try {
-                      final date = DateTime.now();
-                      final data = formatDate(date, [d, '-', M, '-', yyyy]);
                       final email = FirebaseAuth.instance.currentUser!.email;
                       String rollnumber =
                           email!.substring(0, email.length - 17);
@@ -86,10 +84,13 @@ class _AddComplaintState extends State<AddComplaint> {
                           .collection('Users')
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .get();
+                      DateTime now = DateTime.now();
+                      String day = DateFormat.yMMMEd().format(now);
                       await FirebaseFirestore.instance
                           .collection('complaints')
                           .add({
-                        "date": data,
+                        "day": day,
+                        "time": FieldValue.serverTimestamp(),
                         "status": "waiting",
                         "name": userDoc.data()!['name'],
                         "batch": userDoc.data()!['batch'],

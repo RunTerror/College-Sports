@@ -1,24 +1,35 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sports_application/view_model/firestore_methos.dart';
+import 'package:sports_application/repositry/firebase_repositry.dart';
 import 'package:sports_application/view_model/profile_controller.dart';
 
-// ignore: must_be_immutable
 class UserProfileWidget extends StatefulWidget {
-  String field1;
-  String field2;
-  String fiedld3;
-  TextEditingController text1;
-  TextEditingController text2;
-  TextEditingController text3;
-   UserProfileWidget({super.key,required this.text1,required this.text2,required this.text3,required this.fiedld3,required this.field1,required this.field2});
+  final String field1;
+  final String field2;
+  final String fiedld3;
+  final TextEditingController text1;
+  final TextEditingController text2;
+  final TextEditingController text3;
+  const UserProfileWidget(
+      {super.key,
+      required this.text1,
+      required this.text2,
+      required this.text3,
+      required this.fiedld3,
+      required this.field1,
+      required this.field2});
 
   @override
   State<UserProfileWidget> createState() => _UserProfileWidgetState();
 }
 
 class _UserProfileWidgetState extends State<UserProfileWidget> {
+  getRollNumber() {
+    var email = context.read<FirebaseAuthMethods>().user.email;
+    email = email!.substring(0, email.length - 17);
+    return email;
+  }
+
   @override
   Widget build(BuildContext context) {
     final profileInstance = Provider.of<ProfileCrontroller>(context);
@@ -48,14 +59,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                     const SizedBox(
                       width: 10,
                     ),
-                    FutureBuilder(
-                      builder: (context, snapshot) {
-                        final docdata = snapshot.data;
-                        return Text("$docdata",
-                            style: const TextStyle(fontSize: 18));
-                      },
-                      future: context.read<FireStoreMethods>().getName(),
-                    ),
+                    Text(context.read<FirebaseAuthMethods>().user.displayName!,
+                        style: const TextStyle(fontSize: 18))
                   ],
                 )
               ],
@@ -108,14 +113,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                   const SizedBox(
                     width: 10,
                   ),
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      final data = snapshot.data;
-                      return Text('$data',
-                          style: const TextStyle(fontSize: 18));
-                    },
-                    future: context.read<FireStoreMethods>().getroll(),
-                  ),
+                  Text(getRollNumber(), style: const TextStyle(fontSize: 18))
                 ],
               ),
             )
@@ -124,29 +122,30 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
         const SizedBox(
           height: 20,
         ),
-         Text(widget.field1,
+        Text(widget.field1,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
-         TextField(
+        TextField(
           controller: widget.text1,
-          decoration:const InputDecoration(hintText: "+Write branch"),
+          decoration: const InputDecoration(hintText: "Sports"),
         ),
         const SizedBox(
           height: 20,
         ),
-         Text(widget.field2,
-            style:const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
+        Text(widget.field2,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
         TextField(
           controller: widget.text2,
-          decoration:const InputDecoration(hintText: "+Write Year"),
+          decoration: const InputDecoration(hintText: "+Write subject"),
         ),
         const SizedBox(
           height: 20,
         ),
         Text(widget.fiedld3,
-            style:const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
         TextField(
+          maxLines: 4,
           controller: widget.text3,
-          decoration:const InputDecoration(hintText: "+Write Sports"),
+          decoration: const InputDecoration(hintText: "+Write Details"),
         ),
       ],
     );

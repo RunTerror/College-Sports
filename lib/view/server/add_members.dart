@@ -75,8 +75,10 @@ class _AddMembersScreenState extends State<AddMembersScreen> {
                   },
                   controller: _searchController,
                   decoration: const InputDecoration(
-                      hintText: "search", border: OutlineInputBorder()),
+                    prefixIcon: Icon(Icons.search),
+                      hintText: "Search by email", border: OutlineInputBorder()),
                 )),
+                const SizedBox(height: 20,),
             Consumer<GetMembersProvider>(
               builder: (context, value, child) {
                 return StreamBuilder(

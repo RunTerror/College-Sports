@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class GetMembersProvider with ChangeNotifier {
-  final List<Map<String, dynamic>> _selectedList = [];
+   List<Map<String, dynamic>> _selectedList = [];
   List<Map<String, dynamic>> get selectedList => _selectedList;
   var uuid = const Uuid();
   bool _isLoading = false;
@@ -84,8 +84,13 @@ class GetMembersProvider with ChangeNotifier {
         _selectedList.removeAt(i);
       }
     }
-
     notifyListeners();
+  }
+
+  removeAllMembers(){
+   _selectedList=[];
+   notifyListeners();
+    
   }
 
   Stream<List<Map<String, dynamic>>> getMembers() {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sports_application/utils/Routes/route_names.dart';
+import 'package:sports_application/view/complaints/complaint_details_screen.dart';
 
-import '../../resources/Components/complaint_card.dart';
+import '../../resources/Components/admin_complaint_card.dart';
 import '../../view_model/complaints_provider.dart';
 
 class NewComplaints extends StatelessWidget {
@@ -40,13 +42,19 @@ class NewComplaints extends StatelessWidget {
                       return Padding(
                         padding:
                             const EdgeInsets.only(top: 10, left: 20, right: 20),
-                        child: ComplaintCard(
-                            complaintid: com.complaintId!,
-                            description: com.desciption!,
-                            name: com.name!,
-                            roll: com.roll!,
-                            sport: com.sport!,
-                            subject: com.subject!),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, RouteNames.detailedComplaint, arguments: com);
+                          },
+                          child: AdminComplaintCard(
+                            date: com.day!,
+                              complaintid: com.complaintId!,
+                              description: com.desciption!,
+                              name: com.name!,
+                              roll: com.roll!,
+                              sport: com.sport!,
+                              subject: com.subject!),
+                        ),
                       );
                     },
                     itemCount: waitingComplaints.length);

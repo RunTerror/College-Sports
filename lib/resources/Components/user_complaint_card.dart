@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class UserComplaintCard extends StatelessWidget {
-  String status;
-  String name;
-  String roll;
-  String sport;
-  String subject;
-  String description;
-  UserComplaintCard(
+  final String day;
+  final String status;
+  final String name;
+  final String roll;
+  final String sport;
+  final String subject;
+  final String description;
+  const UserComplaintCard(
       {super.key,
+      required this.day,
       required this.status,
       required this.description,
       required this.name,
@@ -23,6 +25,7 @@ class UserComplaintCard extends StatelessWidget {
     var w = MediaQuery.of(context).size.width;
     var theme = Theme.of(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           padding: const EdgeInsets.all(15),
@@ -36,6 +39,7 @@ class UserComplaintCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
@@ -46,38 +50,41 @@ class UserComplaintCard extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Text(
                         roll,
                         style: const TextStyle(color: Colors.grey),
                       )
                     ],
                   ),
-                  CircleAvatar(
-                    backgroundColor: theme.colorScheme.primary,
+                  Text(
+                    day,
                   )
                 ],
-              ),
-              SizedBox(
-                height: h / 50,
               ),
               const Divider(
                 height: 5,
                 color: Colors.grey,
               ),
               SizedBox(
-                height: h / 100,
+                height: h / 200,
               ),
               Row(
                 children: [
-                  Text(
-                    sport,
-                    style: const TextStyle(
+                  const Text(
+                    "Sport:",
+                    style: TextStyle(
                       fontSize: 18,
+                      fontWeight: FontWeight.w500
                     ),
                   ),
-                  Expanded(
+                  const SizedBox(width: 20,),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
                     child: Text(
-                      '($subject)',
+                      sport,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                       maxLines: 1,
@@ -86,17 +93,29 @@ class UserComplaintCard extends StatelessWidget {
                   ),
                 ],
               ),
+              // const Divider(height: 4,),
               SizedBox(
-                height: h / 100,
+                height: h / 1000,
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Details:",
+                    style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
                       child: Text(
                     description,
                     softWrap: false,
-                    maxLines: 3,
+
                     overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 14),
                   )),
                 ],
               ),
@@ -106,37 +125,37 @@ class UserComplaintCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                 
-                    Container(
-                      alignment: Alignment.center,
-                      width: w / 3,
-                      height: h / 20,
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(5),
-                          ),
-                          border: Border.all(width: 1, color: Colors.black)),
-                      child: const Text(
-                       "Status",
-                        style: TextStyle(color: Colors.black),
-                      ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: w / 3,
+                    height: h / 20,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                        border: Border.all(width: 1, color: Colors.black)),
+                    child: const Text(
+                      "Status",
+                      style: TextStyle(color: Colors.black),
                     ),
-                 Container(
-                      alignment: Alignment.center,
-                      width: w / 3,
-                      height: h / 20,
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(5),
-                          ),
-                          border: Border.all(
-                            color: status=="Done"? Colors.green: Colors.red,
-                            width: 1,
-                          )),
-                      child: Text(
-                        status,
-                        style: TextStyle(color: status=="Done"? Colors.green: Colors.red),
-                      ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: w / 3,
+                    height: h / 20,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                        border: Border.all(
+                          color: status == "Done" ? Colors.green : Colors.red,
+                          width: 1,
+                        )),
+                    child: Text(
+                      status,
+                      style: TextStyle(
+                          color: status == "Done" ? Colors.green : Colors.red),
+                    ),
                   ),
                 ],
               ),

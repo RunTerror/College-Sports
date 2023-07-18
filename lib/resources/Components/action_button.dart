@@ -15,15 +15,7 @@ class ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 1,
-          ),
-        ),
-        child: ListTile(
+    return ListTile(
           onTap: () {
             Navigator.of(context).pop();
             showDialog(
@@ -65,8 +57,6 @@ class ActionButton extends StatelessWidget {
           title: Text(
             status,
           ),
-        ),
-      ),
     );
   }
 }

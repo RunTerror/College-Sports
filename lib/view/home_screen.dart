@@ -23,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   var selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    var h = MediaQuery.of(context).size.height;
-    var w = MediaQuery.of(context).size.width;
     List<Widget> userscreens = const [
       UserAnnouncementScreen(),
       UserComplaintScreen(),
@@ -35,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     List<Widget> adminScreens = const [
       AdminAnnouncementScreen(),
-      ComplaintScreen(),
+      AdminComplaintScreen(),
       ServerSceen(),
       Achievements(),
       AdminProfile()
@@ -43,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final mail = FirebaseAuth.instance.currentUser!.email.toString();
 
-    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: mail[0] == "2" ? userscreens[selectedIndex] : adminScreens[selectedIndex],
@@ -75,23 +72,23 @@ class _HomeScreenState extends State<HomeScreen> {
             tabBorderRadius: 50,
             tabs: const [
               GButton(
-                icon: Icons.speaker,
-                text: " Ann",
+                icon: Icons.volume_down,
+                text: "Bulletin",
               ),
               GButton(
-                icon: Icons.home,
-                text: "Home",
+                icon: Icons.report,
+                text: "Complaint",
               ),
               GButton(
-                icon: Icons.library_books_outlined,
-                text: "Profile",
+                icon: Icons.message,
+                text: "Servers",
               ),
               GButton(
-                icon: LineIcons.comment,
-                text: "Add",
+                icon: LineIcons.trophy,
+                text: "winnings",
               ),
               GButton(
-                icon: Icons.account_circle,
+                icon: Icons.person_outline,
                 text: "Profile",
               ),
             ],

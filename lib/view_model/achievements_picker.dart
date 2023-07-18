@@ -13,27 +13,34 @@ class AchievementPicker with ChangeNotifier {
   File? _poster;
   File? get poster => _poster;
 
-  pickimg(ImageSource source) async {
-    final pickedfile = await imagePicke.pickImage(source: source);
-
-    if (pickedfile != null) {
-      _img = File(pickedfile.path);
-
-      notifyListeners();
-    }
-  }
-
-  pickPoster(ImageSource source) async {
-    final pickedPoster = await imagePicke.pickImage(source: source);
-    if (pickedPoster != null) {
-      _poster = File(pickedPoster.path);
-      notifyListeners();
-    }
+  selectImage(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: const Text("Pick image"),
+          actions: [
+            ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text("Camera"),
+                onTap: () {
+                  pickAchievement(ImageSource.camera);
+                  Navigator.pop(context);
+                }),
+            ListTile(
+                leading: const Icon(Icons.photo),
+                title: const Text("Gallery"),
+                onTap: () {
+                  pickAchievement(ImageSource.gallery);
+                  Navigator.pop(context);
+                })
+          ],
+        );
+      },
+    );
   }
 
   showBox(BuildContext context) {
-    var h = MediaQuery.of(context).size.height;
-    var w = MediaQuery.of(context).size.width;
     showDialog(
       context: context,
       builder: (context) {
@@ -44,6 +51,7 @@ class AchievementPicker with ChangeNotifier {
               leading: const Icon(Icons.photo_camera),
               onTap: () {
                 pickPoster(ImageSource.camera);
+                Navigator.pop(context);
               },
               title: const Text("Camera"),
             ),
@@ -51,6 +59,7 @@ class AchievementPicker with ChangeNotifier {
               leading: const Icon(Icons.photo_outlined),
               onTap: () {
                 pickPoster(ImageSource.gallery);
+                Navigator.pop(context);
               },
               title: const Text("Gallery"),
             )
@@ -58,6 +67,27 @@ class AchievementPicker with ChangeNotifier {
         );
       },
     );
+  }
+
+  pickAchievement(ImageSource source) async {
+    final pickedFile = await imagePicke.pickImage(source: source);
+    if (pickedFile != null) {
+      _img = File(pickedFile.path);
+    }
+    notifyListeners();
+  }
+
+  pickPoster(ImageSource source) async {
+    final pickedPoster = await imagePicke.pickImage(source: source);
+    if (pickedPoster != null) {
+      _poster = File(pickedPoster.path);
+      notifyListeners();
+    }
+  }
+
+  nullPoster() {
+    _poster = null;
+    notifyListeners();
   }
 
   uploadPickedImg(String sport, String achievementid) async {
@@ -72,9 +102,11 @@ class AchievementPicker with ChangeNotifier {
       "image": newUrl,
     });
   }
+
   uploadPickedPoster(String announcementId) async {
-    firebase_storage.Reference storageRef =
-        firebase_storage.FirebaseStorage.instance.ref('/announcement$announcementId');
+    firebase_storage.Reference storageRef = firebase_storage
+        .FirebaseStorage.instance
+        .ref('/announcement$announcementId');
     firebase_storage.UploadTask uploadTask = storageRef.putFile(
       File(poster!.path),
     );

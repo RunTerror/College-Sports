@@ -3,6 +3,7 @@ import 'package:sports_application/resources/Components/action_button.dart';
 
 // ignore: must_be_immutable
 class HoldComplaintCard extends StatelessWidget {
+  String date;
   String complaintId;
   String status;
   String name;
@@ -12,6 +13,7 @@ class HoldComplaintCard extends StatelessWidget {
   String description;
   HoldComplaintCard(
       {super.key,
+      required this.date,
       required this.complaintId,
       required this.status,
       required this.description,
@@ -39,6 +41,7 @@ class HoldComplaintCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
@@ -55,9 +58,7 @@ class HoldComplaintCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  CircleAvatar(
-                    backgroundColor: theme.colorScheme.primary,
-                  )
+                  Text(date)
                 ],
               ),
               SizedBox(

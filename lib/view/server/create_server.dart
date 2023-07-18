@@ -26,63 +26,70 @@ class _CreateServerState extends State<CreateServer> {
       appBar: AppBar(
         title: const Text("Group name"),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              controller: _createName,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: "Server name"),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          SizedBox(
-            height: h / 2,
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: const Icon(Icons.person),
-                  title: Text('${getmembers.selectedList[index]['name']}'),
-                  subtitle: Text('${getmembers.selectedList[index]['email']}'),
-                );
-              },
-              itemCount: getmembers.selectedList.length,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextField(
+                controller: _createName,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), hintText: "Server name"),
+              ),
             ),
-          ),
-          InkWell(
-            onTap: () async {
-              if (_createName.text.isEmpty) {
-                Utils.flushbarErrorMessage("Please add group name", context);
-              } else {
-                setState(() {
-                  isLoading = true;
-                });
-                await getmembers.createServer(
-                    widget.membersList, _createName.text, widget.name);
-                setState(() {
-                  isLoading = false;
-                });
-                if (mounted) {
-                  Navigator.pop(context);
+            SizedBox(
+              height: h / 2,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: const Icon(Icons.person),
+                    title: Text('${getmembers.selectedList[index]['name']}'),
+                    subtitle:
+                        Text('${getmembers.selectedList[index]['email']}'),
+                  );
+                },
+                itemCount: getmembers.selectedList.length,
+              ),
+            ),
+            InkWell(
+              onTap: () async {
+                if (_createName.text.isEmpty) {
+                  Utils.flushbarErrorMessage("Please add group name", context);
+                } else {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  await getmembers.createServer(
+                      widget.membersList, _createName.text, widget.name);
+                  setState(() {
+                    isLoading = false;
+                  });
+
+                  if (mounted) {
+                    Provider.of<GetMembersProvider>(context, listen: false)
+                        .removeAllMembers();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  }
                 }
-              }
-            },
-            child: Container(
-              alignment: Alignment.center,
-              height: h / 20,
-              width: w / 1.2,
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  color: ExternalColors.lightgreen),
-              child: isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text("Create"),
-            ),
-          )
-        ],
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: h / 15,
+                width: w / 1.2,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    color: ExternalColors.lightgreen),
+                child: isLoading
+                    ? const CircularProgressIndicator()
+                    : const Text("Create"),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

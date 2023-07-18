@@ -29,6 +29,14 @@ class _AnnouncementFormState extends State<AnnouncementForm> {
     var w = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.cancel)),
+        title: const Text("Add announcement"),
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         width: w,
@@ -44,11 +52,20 @@ class _AnnouncementFormState extends State<AnnouncementForm> {
                     value.showBox(context);
                   },
                   child: Container(
-                    height: h / 2,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        border: Border.all(width: 1)),
+                    height: h / 2.3,
                     width: w / 1.1,
-                    color: Colors.green,
                     child: value.poster == null
-                        ? null
+                        ? const Image(
+                            image: AssetImage(
+                              'assets/Images/another.png',
+                            ),
+                            fit: BoxFit.cover,
+                          )
                         : Image(
                             fit: BoxFit.cover, image: FileImage(value.poster!)),
                   ),
@@ -114,12 +131,15 @@ class _AnnouncementFormState extends State<AnnouncementForm> {
                             .collection('announcements')
                             .doc(uid)
                             .set({
+                          "time": FieldValue.serverTimestamp(),
                           "Event Name": eventController.text,
                           "Date": date,
                           "Note": noteController.text,
                         }).then((value) {
                           isLoading = false;
                           Utils.toastMessage("Announcement added!");
+                          Provider.of<AchievementPicker>(context, listen: false)
+                              .nullPoster();
                           Navigator.of(context).pop();
                         });
                       } on FirebaseAuthException catch (e) {
@@ -143,7 +163,9 @@ class _AnnouncementFormState extends State<AnnouncementForm> {
                 );
               },
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),

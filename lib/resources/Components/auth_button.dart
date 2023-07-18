@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sports_application/resources/Colors/colors.dart';
 
 class AuthButton extends StatelessWidget {
-  final function;
+  final VoidCallback function;
   final String text;
-  const AuthButton(
-      {super.key,
-      required this.function,
-      required this.text,});
+  const AuthButton({
+    super.key,
+    required this.function,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
