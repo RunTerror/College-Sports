@@ -26,7 +26,7 @@ class HoldComplaintCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    var theme = Theme.of(context);
+
     return Column(
       children: [
         Container(

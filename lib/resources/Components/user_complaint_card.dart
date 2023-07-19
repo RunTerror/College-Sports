@@ -23,7 +23,6 @@ class UserComplaintCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    var theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -115,7 +114,7 @@ class UserComplaintCard extends StatelessWidget {
                     softWrap: false,
 
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 14),
+                    style:const TextStyle(fontSize: 14),
                   )),
                 ],
               ),

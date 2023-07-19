@@ -12,7 +12,6 @@ class FireStoreMethods {
     if (data.exists) {
       return data.data()!['name'];
     } else {
-      print("not exist");
     }
   }
   

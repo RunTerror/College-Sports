@@ -14,12 +14,12 @@ class ComplaintDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon:const Icon(Icons.cancel)),
         title: Text(complaintDetails.sport!),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         color: Colors.white,
-        // alignment: Alignment.center,
         width: w,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

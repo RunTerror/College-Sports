@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
@@ -47,7 +46,8 @@ class _SportsAchievementsState extends State<SportsAchievements> {
                 );
               } else if (snapshot.hasData) {
                 final snapshotdata = snapshot.data;
-                return ListView.builder(
+                if(snapshotdata!.isNotEmpty){
+                 return ListView.builder(
                   itemBuilder: (context, index) {
                     return Padding(
                       padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -132,6 +132,11 @@ class _SportsAchievementsState extends State<SportsAchievements> {
                   },
                   itemCount: snapshotdata!.length,
                 );
+                }
+                else{
+                  return const Center(child: Text("No data!", style: TextStyle(fontSize: 20),),);
+                }
+                
               }
               return const Text("No Data");
             },

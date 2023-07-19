@@ -126,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   AuthButton(
                       function: () async {
-                        var copy = emailcontroller.text;
+                        // var copy = emailcontroller.text;
                         if (nameController.text.isEmpty) {
                           Utils.flushbarErrorMessage(
                               "Please enter your full name", context);

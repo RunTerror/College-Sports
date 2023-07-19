@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class ProfileField extends StatelessWidget {
   final int? maxLine;
-  TextEditingController namecontroller;
+  final  TextEditingController namecontroller;
   final String hintText;
   final IconData iconData;
-   ProfileField({super.key,required this.namecontroller,required this.hintText,required this.iconData,this.maxLine=1});
+  const ProfileField({super.key,required this.namecontroller,required this.hintText,required this.iconData,this.maxLine=1});
 
   @override
   Widget build(BuildContext context) {

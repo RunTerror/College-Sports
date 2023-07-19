@@ -81,7 +81,7 @@ class _PreViewScreenState extends State<PreViewScreen> {
                 Divider(
                   color: theme.colorScheme.primary,
                 ),
-                Container(
+                SizedBox(
                   height: h / 13,
                   child: Row(
                     children: [
@@ -90,7 +90,6 @@ class _PreViewScreenState extends State<PreViewScreen> {
                           onPressed: () {
                             try {
                               String uid = uuid.v4();
-                              print(uid.toString());
                               FirebaseFirestore.instance
                                   .collection(widget.sport)
                                   .doc(uid.toString())

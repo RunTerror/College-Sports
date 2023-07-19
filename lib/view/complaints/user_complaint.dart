@@ -61,10 +61,11 @@ class _UserComplaintScreenState extends State<UserComplaintScreen>
                         );
                       } else if (snapshot.hasData) {
                         var data = snapshot.data;
-                        return ListView.builder(
+                        if(data!.isNotEmpty){
+                          return ListView.builder(
 
                             itemBuilder: (context, index) {
-                              var com = data![index];
+                              var com = data[index];
 
                               return Column(
                                 children: [
@@ -95,6 +96,12 @@ class _UserComplaintScreenState extends State<UserComplaintScreen>
                             },
                             itemCount: snapshot.data!.length);
                       }
+                      else{
+                        return const Center(child: Text("Add Complaints!", style: TextStyle(fontSize: 20, ),),);
+                      }
+
+                        }
+                        
                       return const Center(
                         child: Text("Complaint Screen"),
                       );

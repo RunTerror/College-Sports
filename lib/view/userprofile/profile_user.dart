@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sports_application/repositry/firebase_repositry.dart';
 import 'package:sports_application/resources/Components/profile_container.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
@@ -17,7 +15,6 @@ class ProfileUser extends StatelessWidget {
     var w = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
     final obj = Provider.of<ProfileCrontroller>(context);
-    final auth=FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: Stack(
         children: [
@@ -292,7 +289,6 @@ class ProfileUser extends StatelessWidget {
                       } else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       }
-                      Map<String, String>? data = snapshot.data!;
                       return Text(
                         context.read<FirebaseAuthMethods>().user.displayName!,
                         style: const TextStyle(

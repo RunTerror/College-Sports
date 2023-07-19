@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
-import 'package:sports_application/view/complaints/complaint_details_screen.dart';
 
 import '../../resources/Components/admin_complaint_card.dart';
 import '../../view_model/complaints_provider.dart';

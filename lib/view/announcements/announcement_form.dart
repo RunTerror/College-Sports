@@ -124,7 +124,9 @@ class _AnnouncementFormState extends State<AnnouncementForm> {
                       Utils.flushbarErrorMessage("Please add note ", context);
                     } else {
                       try {
-                        isLoading = true;
+                        setState(() {
+                          isLoading = true;
+                        });
                         final uid = uuid.v4();
                         value.uploadPickedPoster(uid);
                         FirebaseFirestore.instance
@@ -136,7 +138,10 @@ class _AnnouncementFormState extends State<AnnouncementForm> {
                           "Date": date,
                           "Note": noteController.text,
                         }).then((value) {
-                          isLoading = false;
+                          setState(() {
+                            isLoading = false;
+                          });
+                          
                           Utils.toastMessage("Announcement added!");
                           Provider.of<AchievementPicker>(context, listen: false)
                               .nullPoster();

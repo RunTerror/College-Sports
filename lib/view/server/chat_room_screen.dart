@@ -17,7 +17,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
 
   onSendMessage() {
     if (_message.text.isNotEmpty) {
-     final Map<String, dynamic> _messageData = {
+     final Map<String, dynamic> messageData = {
         "email": FirebaseAuth.instance.currentUser!.email,
         "sendBy": FirebaseAuth.instance.currentUser!.displayName,
         "message": _message.text,
@@ -30,7 +30,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
           .collection('groups')
           .doc(widget.groupChatid)
           .collection('chats')
-          .add(_messageData);
+          .add(messageData);
     }
   }
 

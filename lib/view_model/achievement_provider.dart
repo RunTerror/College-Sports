@@ -20,7 +20,6 @@ class AchivementProvider with ChangeNotifier {
             "year": doc.data()['year'],
           };
         }).toList());
-        print(data);
         return data;
   }
 }

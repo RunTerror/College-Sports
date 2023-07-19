@@ -4,14 +4,13 @@ import 'package:sports_application/resources/Colors/colors.dart';
 class ProfileContainer extends StatelessWidget {
   final IconData iconData;
   final String text;
-  final function;
+  final VoidCallback function;
   const ProfileContainer({super.key,required this.function, required this.iconData, required this.text});
 
   @override
   Widget build(BuildContext context) {
 
     var h = MediaQuery.of(context).size.height;
-    var w = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: function,
       child: Container(

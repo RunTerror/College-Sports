@@ -55,8 +55,8 @@ class AdminAnnouncementScreen extends StatelessWidget {
                           return Center(child: Text('${snapshot.error}'));
                         } else if (snapshot.hasData) {
                           final announcementData = snapshot.data;
-
-                          return ListView.builder(
+                          if(announcementData!.isNotEmpty){
+                            return ListView.builder(
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -135,6 +135,11 @@ class AdminAnnouncementScreen extends StatelessWidget {
                             },
                             itemCount: announcementData!.length,
                           );
+                          }
+                          else{
+                            return const Center(child: Text("No Announcements!"),);
+                          }
+                          
                         }
                         return const Text("No Announcemnts");
                       },

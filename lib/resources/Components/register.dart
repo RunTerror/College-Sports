@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sports_application/resources/Colors/colors.dart';
 
 class Register extends StatelessWidget {
-  final function;
+  final VoidCallback function;
   const Register({super.key,required this.function});
 
   @override

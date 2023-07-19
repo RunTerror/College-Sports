@@ -186,7 +186,6 @@ class _AddAchievementState extends State<AddAchievement> {
                           onTap: () {
                             provider
                                 .removeMember(provider.members[index]);
-                            print(provider.members.length);
                             setState(() {});
                           },
                           title: Text(provider.members[index]),

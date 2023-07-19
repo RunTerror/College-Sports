@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sports_application/resources/Colors/colors.dart';
 
 class LandingButton extends StatelessWidget {
   final IconData icon;
   final String text;
-  final function;
+  final VoidCallback function;
   const LandingButton({super.key,required this.icon,required this.text,required this.function});
 
   @override

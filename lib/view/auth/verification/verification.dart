@@ -45,7 +45,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   Future sendVerification() async {
     try {
-      print("sent");
       await FirebaseAuth.instance.currentUser!.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       Utils.snackBar(e.message!, context);
@@ -54,7 +53,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
   
   @override
   Widget build(BuildContext context) {
-    print(FirebaseAuth.instance.currentUser!.email);
     var theme=Theme.of(context);
     return isverified? const HomeScreen(): Scaffold(
 

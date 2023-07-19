@@ -13,7 +13,6 @@ class AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
-    var h = MediaQuery.of(context).size.height;
     return InkWell(
         onTap: function,
         child: Container(

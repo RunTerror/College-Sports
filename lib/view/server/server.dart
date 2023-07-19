@@ -32,27 +32,40 @@ class ServerSceen extends StatelessWidget {
                       );
                     }
                     final rooms = snapshot.data!;
-                    return SizedBox(
-                      width: w,
-                      height: h / 1.3,
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return ChatRoomScreen(
-                                    groupChatid: rooms[index]['id'],
-                                    groupName: rooms[index]['name']);
-                              }));
-                            },
-                            title: Text(rooms[index]['name']),
-                            leading: const Icon(Icons.group),
-                          );
-                        },
-                        itemCount: rooms.length,
-                      ),
-                    );
+                    if (rooms.isNotEmpty) {
+                      return SizedBox(
+                        width: w,
+                        height: h / 1.3,
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) {
+                                  return ChatRoomScreen(
+                                      groupChatid: rooms[index]['id'],
+                                      groupName: rooms[index]['name']);
+                                }));
+                              },
+                              title: Text(rooms[index]['name']),
+                              leading: const Icon(Icons.group),
+                            );
+                          },
+                          itemCount: rooms.length,
+                        ),
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          SizedBox(height: h/2.2,),
+                          const Center(
+                              child:  Text(
+                            "Create your own server 💬",
+                            style: TextStyle(fontSize: 20),
+                          )),
+                        ],
+                      );
+                    }
                   },
                   stream: value.getChatrooms(),
                 );
@@ -63,7 +76,6 @@ class ServerSceen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
               return const AddMembersScreen();

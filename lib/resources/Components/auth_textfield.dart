@@ -5,7 +5,7 @@ class AuthTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final String hintText;
-  final iconClickEvent;
+  final VoidCallback iconClickEvent;
   final IconData prefixIcon;
   final String value;
 

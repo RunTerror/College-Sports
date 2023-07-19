@@ -14,7 +14,6 @@ class ChatRoomsProvider extends ChangeNotifier {
     final doc= snapshots.map((snapshot) => snapshot.docs.map((doc) {
           return {"name": doc.data()['name'], "id": doc.data()['id']};
         }).toList());
-        print(doc);
         return doc;
   }
 }

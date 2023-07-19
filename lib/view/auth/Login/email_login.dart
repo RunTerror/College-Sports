@@ -120,7 +120,6 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                     ),
                     AuthButton(
                         function: () async {
-                          var copy = emailcontroller.text;
                           if (emailcontroller.text.isEmpty) {
                             Utils.flushbarErrorMessage(
                                 "Please enter your college email id", context);
@@ -149,7 +148,10 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                                             .trim()
                                             .toString(),
                                         context);
-                                Navigator.pop(context);
+                                        if(context.mounted){
+ Navigator.pop(context);
+                                        }
+                               
                               } on FirebaseException catch (e) {
                                 Utils.snackBar(e.message!, context);
                               }

@@ -16,7 +16,6 @@ class GetMembersProvider with ChangeNotifier {
 
   createServer(List<Map<String, dynamic>> selectedList, String groupName,
       String name) async {
-        print(selectedList);
 
     String groupId = uuid.v4();
 
