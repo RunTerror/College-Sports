@@ -38,8 +38,42 @@ The application is developed using the Flutter framework, which ensures cross-pl
 
 ## Preview
 
-# Six Images in One Row
 
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/d95111d8-6a00-4212-9cc0-2dd9fa38646d" alt="Image 1"width="200" height="400">
+    </td>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/6cd3cbf1-3988-40d4-bffd-4260cdd3c5f4" alt="Image 2"width="200" height="400">
+    </td>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/e8697819-147c-433e-b4d0-c2f07555786f" alt="Image 3"width="200" height="400">
+    </td>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/4f8373c0-26b3-4fc2-b405-3e3d38c32958" alt="Image 4"width="200" height="400">
+    </td>
+  </tr>
+</table>
+![WhatsApp Image 2023-07-21 at 00 42 24 (1)]()
+
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/e1e4c405-95df-4d7b-bc0e-7a636eb479b5" alt="Image 1"width="200" height="400">
+    </td>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/64bdb3cd-2156-41db-a35d-a30b901a711a" alt="Image 2"width="200" height="400">
+    </td>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/25240546-c268-4e38-aed7-b6ea394ff2b5" alt="Image 3"width="200" height="400">
+    </td>
+    <td>
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/4f8373c0-26b3-4fc2-b405-3e3d38c32958" alt="Image 4"width="200" height="400">
+    </td>
+  </tr>
+</table>
 
 
 
@@ -47,22 +81,16 @@ The application is developed using the Flutter framework, which ensures cross-pl
 <table>
   <tr>
     <td>
-      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/d95111d8-6a00-4212-9cc0-2dd9fa38646d" alt="Image 1">
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/bf13c139-70a3-40c0-b9d4-8df38c98ff00" alt="Image 1"width="200" height="400">
     </td>
     <td>
-      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/6cd3cbf1-3988-40d4-bffd-4260cdd3c5f4" alt="Image 2">
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/7b28030a-8390-4a09-b2f3-d6e53cca29da" alt="Image 2"width="200" height="400">
     </td>
     <td>
-      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/e8697819-147c-433e-b4d0-c2f07555786f" alt="Image 3">
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/32b38d8e-618b-4efa-830d-4c05730410b6" alt="Image 3"width="200" height="400">
     </td>
     <td>
-      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/4f8373c0-26b3-4fc2-b405-3e3d38c32958" alt="Image 4">
-    </td>
-    <td>
-      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/69f7a41e-665d-4a83-90af-cfc2b56361f9" alt="Image 5">
-    </td>
-    <td>
-      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/3b43511f-7c8a-48b3-bd1b-bcb6ec8cb45e" alt="Image 6">
+      <img src="https://github.com/RunTerror/Sports-Hub/assets/113206442/0ae1789e-304e-4cbd-9e9e-7a4de0225ddc" alt="Image 4"width="200" height="400">
     </td>
   </tr>
 </table>
