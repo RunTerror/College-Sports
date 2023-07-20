@@ -3,27 +3,27 @@
 Sports Hub is a Flutter application that serves as a sports community platform for college students of the Institute of Engineering and Technology (IET), Lucknow. It allows users with college email IDs ending with "@ietlucknow.ac.in" to access the app and assigns them roles of either admin or user based on their email ID. The application is backed by Firebase for seamless authentication, real-time database management, and cloud storage.
 
 <h2>Features</h2>
-<h3>Login and Role-Based Access:</h3>
+<h3>1.Login and Role-Based Access:</h3>
 
 Users can sign in using their college email IDs (ending with "@ietlucknow.ac.in").
 Role-based access: Admin privileges will be granted to users with specific email IDs, giving them additional features beyond regular users.
-2. <h3>Announcements:</h3>
+<h3>2.Announcements:</h3>
 
 Admins can create and post announcements related to sports events, tournaments, or any important updates.
 Users can view these announcements on their dashboard.
-3. <h3>Complaints:</h3>
+<h3>3.Complaints:</h3>
 
 Users can submit complaints or feedback related to the sports facilities, events, or any other issues they encounter.
 Admins can manage and respond to these complaints to ensure a smooth sports experience for everyone.
-4. <h3>Group Chat:</h3>
+<h3>4.Group Chat:</h3>
 
 Users can join sports-specific groups based on their interests or participate in group chats related to sports events.
 Admins have the ability to create, edit, and delete groups as needed.
-5. <h3>Achievement Section:</h3>
+<h3>5.Achievement Section:</h3>
 
 Admins can add achievements and milestones related to sports achievements, academic accomplishments, or any other recognition.
 Users can view these achievements to celebrate and motivate each other's successes.
-6. <h3>User Profiles:</h3>
+<h36.>User Profiles:</h3>
 
 Each user will have a personalized profile where they can view their information and track their sports-related activities and achievements.
 <h2>Technical Details</h2>
