@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
 import 'package:sports_application/view/complaints/hold_complaint_card.dart';
+import 'package:sports_application/view/complaints/spinkit.dart';
 import '../../view_model/complaints_provider.dart';
 
 class HoldComplaints extends StatelessWidget {
@@ -15,7 +16,7 @@ class HoldComplaints extends StatelessWidget {
           return StreamBuilder(
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return LoadingKit.spinkit;
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text('${snapshot.error}'),

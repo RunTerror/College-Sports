@@ -9,20 +9,20 @@ import 'package:sports_application/view_model/achievement_provider.dart';
 import 'package:sports_application/view_model/admin_controller.dart';
 import 'package:sports_application/view_model/announcement_data.dart';
 import 'package:sports_application/view_model/complaints_provider.dart';
-import 'package:sports_application/view_model/firestore_methos.dart';
 import 'package:sports_application/view_model/get_chatrooms.dart';
 import 'package:sports_application/view_model/get_members.dart';
 import 'package:sports_application/view_model/get_users.dart';
 import 'package:sports_application/view_model/profile_controller.dart';
 import 'package:sports_application/view_model/profile_provider.dart';
-import 'package:sports_application/view_model/selected_members.dart';
 import 'package:sports_application/view_model/theme_provider.dart';
 import 'package:sports_application/view_model/achievements_picker.dart';
-import 'package:sports_application/view_model/winning_members.dart';
+
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  
   runApp(const MyApp());
 }
 
@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
               initialData: null),
           ChangeNotifierProvider(create: (context) => ThemeProvider()),
           ChangeNotifierProvider(create: (context) => AchievementPicker()),
-          Provider<FireStoreMethods>(create: (context) => FireStoreMethods()),
           ChangeNotifierProvider(create: (context) => ComplaintProvider()),
           StreamProvider(
               create: (_) => context.read<ComplaintProvider>().getComplaints(),
@@ -53,9 +52,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => GetUsers()),
           ChangeNotifierProvider(create: (context) => AdminProfileController()),
           ChangeNotifierProvider(create: (context) => GetMembersProvider()),
-          ChangeNotifierProvider(create: (context)=> SelectedMembers()),
           ChangeNotifierProvider(create: (context)=> ChatRoomsProvider()),
-          ChangeNotifierProvider(create: (context)=> WinningMembers())
 
         ],
         builder: (context, child) {

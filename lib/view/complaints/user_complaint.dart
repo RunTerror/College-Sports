@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sports_application/view/complaints/spinkit.dart';
 import '../../resources/Components/user_complaint_card.dart';
 import '../../utils/Routes/route_names.dart';
 import '../../view_model/complaints_provider.dart';
@@ -54,7 +55,7 @@ class _UserComplaintScreenState extends State<UserComplaintScreen>
                   return StreamBuilder(
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
+                        return LoadingKit.spinkit;
                       } else if (snapshot.hasError) {
                         return Center(
                           child: Text('${snapshot.error}'),
@@ -97,7 +98,7 @@ class _UserComplaintScreenState extends State<UserComplaintScreen>
                             itemCount: snapshot.data!.length);
                       }
                       else{
-                        return const Center(child: Text("Add Complaints!", style: TextStyle(fontSize: 20, ),),);
+                        return const Center(child: Text("Add Complaints!", style: TextStyle(fontSize: 20,),),);
                       }
 
                         }

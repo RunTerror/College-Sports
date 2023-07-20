@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -223,40 +224,18 @@ class AdminProfile extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      Map<String, String>? data = snapshot.data!;
-                      return Text(
-                        '${data['name']}',
+                 Text(
+                        FirebaseAuth.instance.currentUser!.displayName!,
                         style: const TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
-                      );
-                    },
-                    future: Provider.of<ProfileProvider>(context).getUserData(),
-                  ),
+                      ),
                   const SizedBox(
                     height: 5,
                   ),
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Text('loading');
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      Map<String, String> data = snapshot.data!;
-                      return Text("${data['email']}",
+                  Text(FirebaseAuth.instance.currentUser!.email!,
                           style: const TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w300));
-                    },
-                    future: Provider.of<ProfileProvider>(context).getUserData(),
-                  )
+                              fontWeight: FontWeight.w300)),
                 ],
               ),
             ),

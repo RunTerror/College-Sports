@@ -24,5 +24,6 @@ class RouteNames {
   static const server='server-screen';
   static const announcementdetail='announcement-detail';
   static const sportsDetail='sports-detail';
+  static const fogotPass='forgot-password';
 
 }

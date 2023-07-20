@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
@@ -12,7 +13,7 @@ class AchievementPicker with ChangeNotifier {
 
   File? _poster;
   File? get poster => _poster;
-   List<String> _members = [];
+  List<String> _members = [];
   List<String> get members => _members;
 
   addMembers(String member) {
@@ -28,8 +29,9 @@ class AchievementPicker with ChangeNotifier {
     }
     notifyListeners();
   }
-  removerMembers(){
-    _members=[];
+
+  removerMembers() {
+    _members = [];
     notifyListeners();
   }
 
@@ -89,25 +91,35 @@ class AchievementPicker with ChangeNotifier {
     );
   }
 
-  removerImage(){
-    _img=null;
+  removerImage() {
+    _img = null;
     notifyListeners();
   }
 
   pickAchievement(ImageSource source) async {
     final pickedFile = await imagePicke.pickImage(source: source);
     if (pickedFile != null) {
-      _img = File(pickedFile.path);
-      
+      final croppedfile = await ImageCropper().cropImage(
+          sourcePath: pickedFile.path,
+          aspectRatioPresets: [CropAspectRatioPreset.square]);
+      if (croppedfile != null) {
+        _img = File(croppedfile.path);
+        notifyListeners();
+      }
     }
-    notifyListeners();
   }
 
   pickPoster(ImageSource source) async {
     final pickedPoster = await imagePicke.pickImage(source: source);
+
     if (pickedPoster != null) {
-      _poster = File(pickedPoster.path);
-      notifyListeners();
+      final croppedfile = await ImageCropper().cropImage(
+          sourcePath: pickedPoster.path,
+          aspectRatioPresets: [CropAspectRatioPreset.square]);
+      if (croppedfile != null) {
+        _poster = File(croppedfile.path);
+        notifyListeners();
+      }
     }
   }
 
@@ -148,6 +160,4 @@ class AchievementPicker with ChangeNotifier {
       "image": newUrl,
     });
   }
-
-
 }

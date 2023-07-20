@@ -41,46 +41,7 @@ class LandingScreen extends StatelessWidget {
                       }),
                 ),
                 Positioned(
-                    left: (w - w / 1.2) / 2,
-                    top: h / 2 + 20 + h / 15 + 20,
-                    child: LandingButton(
-                        icon: Icons.phone_android,
-                        text: "Continue with number",
-                        function: () {
-                          Navigator.pushNamed(context, RouteNames.phonelogin);
-      
-                        })),
-                Positioned(
-                    top: h / 2 + 20 + h / 7.5 + 40,
-                    child: Container(
-                      width: w,
-                      alignment: Alignment.center,
-                      child: Text("or login with", style: theme.textTheme.bodyLarge,),
-                    )),
-                Positioned(
-                  top: h / 2 + 20 + h / 7.5 + 80,
-                  left: (w-w/1.2)/2,
-                  child: SizedBox(
-                    width: w/1.2,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                            onTap: () {},
-                            child: const GoogleButton(
-                                image: "assets/Images/google.jpeg",
-                                text: "Google")),
-                        InkWell(
-                            onTap: () {},
-                            child: const GoogleButton(
-                                image: "assets/Images/twitter.png",
-                                text: "Twitter")),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                    bottom: h / 40,
+                    top: h/2+ 100,
                     child: Register(function: (){
                       Navigator.pushNamed(context, RouteNames.register);
                     }))

@@ -24,9 +24,9 @@ class AchievementDetail extends StatelessWidget {
         body: ListView(
           children: [
             Container(
-              width: w,
-              height: h / 2.5,
-              color: Colors.green,
+              padding: EdgeInsets.all(20),
+              width: w/1.1,
+              height: w/1.1,
               child: Image(
                 image: achievementdetail['imageUrl'] == null
                     ? const AssetImage('assets/Images/lodig.jpeg')
@@ -80,7 +80,7 @@ class AchievementDetail extends StatelessWidget {
                       child: ListView.builder(
                         itemBuilder: (context, index) {
                           return Center(
-                              child: Text(achievementdetail['team'][index]));
+                              child: Padding(padding: EdgeInsets.only(top: 6),child: Text(achievementdetail['team'][index])));
                         },
                         itemCount: achievementdetail['team'].length,
                       )),

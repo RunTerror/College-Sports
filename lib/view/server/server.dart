@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sports_application/view/complaints/spinkit.dart';
 import 'package:sports_application/view/server/add_members.dart';
 import 'package:sports_application/view/server/chat_room_screen.dart';
 import 'package:sports_application/view_model/get_chatrooms.dart';
@@ -21,7 +22,7 @@ class ServerSceen extends StatelessWidget {
                 return StreamBuilder(
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
+                      return  Center(child: SizedBox(height:h, width: w,child: LoadingKit.spinkit));
                     } else if (snapshot.hasError) {
                       return Center(
                         child: Text('${snapshot.error}'),

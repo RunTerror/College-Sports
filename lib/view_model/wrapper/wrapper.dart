@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/repositry/firebase_repositry.dart';
 import 'package:sports_application/view/auth/Landing/landing_screen.dart';
-import 'package:sports_application/view/auth/verification/verification.dart';
+import 'package:sports_application/view/auth/Login/email_login.dart';
 import 'package:sports_application/view/home_screen.dart';
 
 class Wrapper extends StatefulWidget {
@@ -28,13 +28,13 @@ class _WrapperState extends State<Wrapper> {
           );
         }
         if (snapshot.hasData) {
-          if (FirebaseAuth.instance.currentUser!.emailVerified) {
+          // if (FirebaseAuth.instance.currentUser!.emailVerified) {
             return const HomeScreen();
-          } else {
-            return const VerificationScreen();
-          }
+          // } else {
+          //   return const VerificationScreen();
+          // }
         } else {
-          return const LandingScreen();
+          return const EmailLoginScreen();
         }
       },
     );

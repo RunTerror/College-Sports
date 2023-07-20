@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/resources/Colors/colors.dart';
 import 'package:sports_application/utils/utils.dart';
@@ -24,23 +25,19 @@ class _UserAnnouncementScreenState extends State<UserAnnouncementScreen> {
     "Javelin Throw",
     "Taikondo"
   ];
+  final spinkit = SpinKitWave(color: ExternalColors.lightgreen,);
+  final imagespinkit=SpinKitPulsingGrid(color: ExternalColors.lightgreen);
 
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final theme = Theme.of(context);
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: h,
-            color: theme.colorScheme.primary,
-          ),
-          Positioned(
-              right: 10,
-              top: 30,
-              child: IconButton(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Announcements"),
+        actions: [
+          IconButton(
                   onPressed: () async {
                     final position = await Provider.of<ProfileProvider>(context,
                             listen: false)
@@ -57,27 +54,26 @@ class _UserAnnouncementScreenState extends State<UserAnnouncementScreen> {
                   icon: const Icon(
                     Icons.add_outlined,
                     color: Colors.white,
-                  ))),
+                  ))
+        ],
+      ),
+      body: Stack(
+        children: [
           Positioned(
-            top: h / 8,
+            top:  0,
             child: Container(
-                padding: const EdgeInsets.only(bottom: 50, top: 40),
+                padding: const EdgeInsets.only(bottom: 50),
                 height: h / 1.2,
                 width: w,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                ),
+                color: Colors.white,
                 child: Consumer<AnnouncementProvider>(
                   builder: (context, announcementInstance, child) {
                     return StreamBuilder(
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
+                          return  Center(
+                            child: spinkit,
                           );
                         } else if (snapshot.hasError) {
                           return Center(child: Text('${snapshot.error}'));
@@ -109,25 +105,27 @@ class _UserAnnouncementScreenState extends State<UserAnnouncementScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(
-                                              height: h / 3,
-                                              width: w,
-                                              child: Image(
-                                                  fit: BoxFit.cover,
-                                                  image: announcementData[index]
+                                        announcementData[index]
                                                               .posterUrl !=
                                                           null
-                                                      ? NetworkImage(
-                                                          announcementData[
-                                                                  index]
-                                                              .posterUrl!)
-                                                      : const AssetImage(
-                                                              'assets/Images/loadig.jpeg')
-                                                          as ImageProvider)),
+                                                      ?  SizedBox(
+                                              height: w/1.1,
+                                              width: w/1.1,
+                                              child:
+                                                ClipRRect(
+                                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+                                                  child: Image(
+                                                    fit: BoxFit.cover,
+                                                    image:  NetworkImage(
+                                                            announcementData[
+                                                                    index]
+                                                                .posterUrl!)),
+                                                ),): 
+                                                              SizedBox(height: w/1.1, width: w/1.1,child: imagespinkit,),
                                           Padding(
                                             padding: EdgeInsets.only(
                                                 left: 10,
-                                                top: (h / 1.8 - h / 3) / 10),
+                                                top: (h / 1.8 - h / 3) / 10-10),
                                             child: Text(
                                               announcementData[index]
                                                   .eventName!,
@@ -144,17 +142,6 @@ class _UserAnnouncementScreenState extends State<UserAnnouncementScreen> {
                                                   style: const TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.grey))),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 10,
-                                                  top: (h / 1.8 - h / 3) / 20,
-                                                  right: 50),
-                                              child: Text(
-                                                announcementData[index].note!,
-                                                softWrap: true,
-                                                maxLines: 4,
-                                                overflow: TextOverflow.ellipsis,
-                                              ))
                                         ],
                                       ),
                                     ),
@@ -175,16 +162,6 @@ class _UserAnnouncementScreenState extends State<UserAnnouncementScreen> {
                   },
                 )),
           ),
-          Positioned(
-              left: (w - w / 1.3) / 2,
-              top: h / 8 + 10,
-              child: Text(
-                "Announcement Screen",
-                style: TextStyle(
-                    color: ExternalColors.darkblue,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500),
-              )),
         ],
       ),
     );

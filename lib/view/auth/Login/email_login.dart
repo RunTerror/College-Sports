@@ -19,6 +19,7 @@ class EmailLoginScreen extends StatefulWidget {
 }
 
 class _EmailLoginScreenState extends State<EmailLoginScreen> {
+  bool loading = false;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passowrdcontroller = TextEditingController();
   String email = '';
@@ -64,12 +65,22 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
             Positioned(
                 left: 20,
                 top: h / 3 - h / 8,
-                child: const Text(
-                  "Log In",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 60,
-                      fontWeight: FontWeight.bold),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Log In",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Enter your email and password",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w300, color: Colors.white),
+                    )
+                  ],
                 )),
             Positioned(
                 top: h / 3 + 30,
@@ -104,7 +115,10 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RouteNames.fogotPass);
+                            },
                             child: Text(
                               "Forgot Password?",
                               style: TextStyle(
@@ -119,20 +133,24 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                       height: 7,
                     ),
                     AuthButton(
+                        loading: loading,
                         function: () async {
+                          var copy = emailcontroller.text.trim();
                           if (emailcontroller.text.isEmpty) {
                             Utils.flushbarErrorMessage(
                                 "Please enter your college email id", context);
-                          }
-                          //  else if (copy.substring(
-                          //         emailcontroller.text.length - 17,
-                          //         emailcontroller.text.length) !=
-                          //     "@ietlucknow.ac.in") {
-                          //   Utils.flushbarErrorMessage(
-                          //       "Please correct your college email id",
-                          //       context);
-                          // } 
-                          else {
+                          } else if (copy.length < 17) {
+                            Utils.flushbarErrorMessage(
+                                "Please enter correct college email id",
+                                context);
+                          } else if (copy.substring(
+                                  emailcontroller.text.length - 17,
+                                  emailcontroller.text.length) !=
+                              "@ietlucknow.ac.in") {
+                            Utils.flushbarErrorMessage(
+                                "Please correct your college email id",
+                                context);
+                          } else {
                             if (passowrdcontroller.text.length < 6 ||
                                 passowrdcontroller.text.isEmpty) {
                               Utils.flushbarErrorMessage(
@@ -140,6 +158,9 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                                   context);
                             } else {
                               try {
+                                setState(() {
+                                  loading = true;
+                                });
                                 await context
                                     .read<FirebaseAuthMethods>()
                                     .loginInWithEmailAndPassword(
@@ -148,10 +169,9 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                                             .trim()
                                             .toString(),
                                         context);
-                                        if(context.mounted){
- Navigator.pop(context);
-                                        }
-                               
+                                setState(() {
+                                  loading = false;
+                                });
                               } on FirebaseException catch (e) {
                                 Utils.snackBar(e.message!, context);
                               }
@@ -164,7 +184,7 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
             Positioned(
                 bottom: h / 30,
                 child: Register(function: () {
-                  Navigator.pushReplacementNamed(context, RouteNames.register);
+                  Navigator.pushNamed(context, RouteNames.register);
                 }))
           ],
         ),

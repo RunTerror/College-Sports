@@ -30,8 +30,8 @@ class AnnouncementDetailScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 20,),
               SizedBox(
-                  width: w,
-                  height: h / 3,
+                  width: w/1.1,
+                  height: w/1.1,
                   child: Image(
                     fit: BoxFit.cover,
                     image: NetworkImage(announcement.posterUrl!),
@@ -59,13 +59,18 @@ class AnnouncementDetailScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              Expanded(
-                child: Text(
-                  announcement.note!,
-                  softWrap: false,
-                  maxLines: 10,
-                  overflow: TextOverflow.ellipsis,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                        announcement.note!,
+                        softWrap: false,
+                        maxLines: 10,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                  ),
+                ],
               ),
             ],
           ),

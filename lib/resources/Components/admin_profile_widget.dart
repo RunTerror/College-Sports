@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/view_model/firestore_methos.dart';
@@ -45,14 +47,8 @@ class _AdminProfileWidgetState extends State<AdminProfileWidget> {
                     const SizedBox(
                       width: 10,
                     ),
-                    FutureBuilder(
-                      builder: (context, snapshot) {
-                        final docdata = snapshot.data;
-                        return Text("$docdata",
-                            style: const TextStyle(fontSize: 18));
-                      },
-                      future: context.read<FireStoreMethods>().getName(),
-                    ),
+                    Text(FirebaseAuth.instance.currentUser!.displayName!,
+                            style: const TextStyle(fontSize: 18))
                   ],
                 )
               ],
@@ -105,14 +101,8 @@ class _AdminProfileWidgetState extends State<AdminProfileWidget> {
                   const SizedBox(
                     width: 10,
                   ),
-                  FutureBuilder(
-                    builder: (context, snapshot) {
-                      final data = snapshot.data;
-                      return Text('$data',
-                          style: const TextStyle(fontSize: 18));
-                    },
-                    future: context.read<FireStoreMethods>().getEmail(),
-                  ),
+                  Text(FirebaseAuth.instance.currentUser!.email!,
+                          style: const TextStyle(fontSize: 18))
                 ],
               ),
             )

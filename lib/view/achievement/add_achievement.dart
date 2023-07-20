@@ -160,14 +160,20 @@ class _AddAchievementState extends State<AddAchievement> {
                 namecontroller: teamController,
                 hintText: "Name",
                 iconData: Icons.person),
-            TextButton(
-                onPressed: () {
-                  if (teamController.text.trim().isNotEmpty) {
-                    provider.addMembers(teamController.text.trim());
-                    teamController.clear();
-                  }
-                },
-                child: const Text("Add member")),
+                 const SizedBox(
+              height: 10,
+            ),
+           Padding(
+            padding:const EdgeInsets.symmetric(horizontal: 80),
+             child: ElevatedButton(onPressed: () {
+                    if (teamController.text.trim().isNotEmpty) {
+                      provider.addMembers(teamController.text.trim());
+                      teamController.clear();
+                    }}, child:const Text("Add Member"), ),
+           ),
+            const SizedBox(
+              height: 10,
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(

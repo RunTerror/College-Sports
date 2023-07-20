@@ -56,18 +56,24 @@ class _AnnouncementFormState extends State<AnnouncementForm> {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
-                        border: Border.all(width: 1)),
+                        border: Border.all(width: 2)),
                     height: h / 2.3,
                     width: w / 1.1,
                     child: value.poster == null
-                        ? const Image(
-                            image: AssetImage(
-                              'assets/Images/another.png',
+                        ? ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          child: const Image(
+                              image: AssetImage(
+                                'assets/Images/another.png',
+                              ),
+                              fit: BoxFit.cover,
                             ),
-                            fit: BoxFit.cover,
-                          )
-                        : Image(
-                            fit: BoxFit.cover, image: FileImage(value.poster!)),
+                        )
+                        : ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(9)),
+                          child: Image(
+                              fit: BoxFit.cover, image: FileImage(value.poster!)),
+                        ),
                   ),
                 );
               },

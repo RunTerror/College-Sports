@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
 import 'package:sports_application/view_model/announcement_data.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class AdminAnnouncementScreen extends StatelessWidget {
+import '../../resources/Colors/colors.dart';
+
+class AdminAnnouncementScreen extends StatefulWidget {
   const AdminAnnouncementScreen({super.key});
+
+  @override
+  State<AdminAnnouncementScreen> createState() =>
+      _AdminAnnouncementScreenState();
+}
+
+class _AdminAnnouncementScreenState extends State<AdminAnnouncementScreen> {
+  final spinkit = SpinKitWave(
+    color: ExternalColors.lightgreen,
+    size: 30,
+  );
+
+  final imagespinkit = SpinKitPulsingGrid(color: ExternalColors.lightgreen);
 
   @override
   Widget build(BuildContext context) {
@@ -48,98 +64,89 @@ class AdminAnnouncementScreen extends StatelessWidget {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return Center(child: spinkit);
                         } else if (snapshot.hasError) {
                           return Center(child: Text('${snapshot.error}'));
                         } else if (snapshot.hasData) {
                           final announcementData = snapshot.data;
-                          if(announcementData!.isNotEmpty){
+                          if (announcementData!.isNotEmpty) {
                             return ListView.builder(
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, RouteNames.announcementdetail,
-                                      arguments: announcementData[index]);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20, right: 20, top: 30, bottom: 10),
-                                  child: Container(
-                                    height: h / 1.8,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 1, color: Colors.black),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(5))),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                            height: h / 3,
-                                            width: w,
-                                            child: announcementData[index]
-                                                        .posterUrl ==
-                                                    null
-                                                ? const Image(
-                                                    fit: BoxFit.contain,
-                                                    image: AssetImage(
-                                                        'assets/Images/loadig.jpeg'))
-                                                : FadeInImage.memoryNetwork(
-                                                    fit: BoxFit.cover,
-                                                    placeholder:
-                                                        kTransparentImage,
-                                                    image:
-                                                        announcementData[index]
-                                                            .posterUrl!)),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 10,
-                                              top: (h / 1.8 - h / 3) / 10),
-                                          child: Text(
-                                            announcementData[index].eventName!,
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Padding(
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, RouteNames.announcementdetail,
+                                        arguments: announcementData[index]);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        top: 30,
+                                        bottom: 10),
+                                    child: Container(
+                                      height: h / 1.8,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 1, color: Colors.black),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5))),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          announcementData[index].posterUrl !=
+                                                  null
+                                              ? SizedBox(
+                                                  height: w / 1.1,
+                                                  width: w / 1.1,
+                                                  child:
+                                                      FadeInImage.memoryNetwork(
+                                                          fit: BoxFit.cover,
+                                                          placeholder:
+                                                              kTransparentImage,
+                                                          image:
+                                                              announcementData[
+                                                                      index]
+                                                                  .posterUrl!))
+                                              : SizedBox(
+                                                  width: w / 1.1,
+                                                  height: w / 1.1,
+                                                  child: imagespinkit),
+                                          Padding(
                                             padding: EdgeInsets.only(
                                                 left: 10,
-                                                top: (h / 1.8 - h / 3) / 20),
+                                                top: (h / 1.8 - h / 3) / 10-10),
                                             child: Text(
-                                                announcementData[index].date!,
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.grey))),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 10,
-                                              top: (h / 1.8 - h / 3) / 20,
-                                              right: 50),
-                                          child: Text(
-                                            announcementData[index].note!,
-                                            softWrap: false,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 4,
+                                              announcementData[index]
+                                                  .eventName!,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                        )
-                                      ],
+                                          Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 10,
+                                                  top: (h / 1.8 - h / 3) / 20),
+                                              child: Text(
+                                                  announcementData[index].date!,
+                                                  style: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.grey))),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                            itemCount: announcementData!.length,
-                          );
+                                );
+                              },
+                              itemCount: announcementData.length,
+                            );
+                          } else {
+                            return const Center(
+                              child: Text("No Announcements!"),
+                            );
                           }
-                          else{
-                            return const Center(child: Text("No Announcements!"),);
-                          }
-                          
                         }
                         return const Text("No Announcemnts");
                       },

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_application/repositry/firebase_repositry.dart';
+import 'package:sports_application/resources/Colors/colors.dart';
 import 'package:sports_application/resources/Components/auth_button.dart';
 import 'package:sports_application/resources/Components/auth_password_field.dart';
 import 'package:sports_application/resources/Components/auth_textfield.dart';
@@ -16,6 +17,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool loading=false;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passowrdcontroller = TextEditingController();
@@ -71,17 +73,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Positioned(
               left: 25,
-              top: h / 3 - h / 7,
-              child: Column(
+              top: h / 3 - h / 8,
+              child:const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Register",
-                    style: theme.textTheme.titleLarge,
+                    style: TextStyle(color: Colors.white, fontSize: 40,fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "create your account",
-                    style: theme.textTheme.bodyLarge,
+                    "create your account with email and password",
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
                   )
                 ],
               ),
@@ -125,8 +127,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 20,
                   ),
                   AuthButton(
+                    loading: loading,
                       function: () async {
-                        // var copy = emailcontroller.text;
+                        var copy = emailcontroller.text.trim();
                         if (nameController.text.isEmpty) {
                           Utils.flushbarErrorMessage(
                               "Please enter your full name", context);
@@ -134,6 +137,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Utils.flushbarErrorMessage(
                               "Please enter your college email id", context);
                         }
+                         else if (copy.substring(
+                                  emailcontroller.text.length - 17,
+                                  emailcontroller.text.length) !=
+                              "@ietlucknow.ac.in") {
+                            Utils.flushbarErrorMessage(
+                                "Please correct your college email id",
+                                context);
+                          } 
                         else if (passowrdcontroller.text.length < 6 ||
                             passowrdcontroller.text.isEmpty) {
                           Utils.flushbarErrorMessage(
@@ -141,6 +152,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               context);
                         } else {
                           try {
+                            setState(() {
+                               loading=true;
+                            });
+                           
                             context
                                 .read<FirebaseAuthMethods>()
                                 .signUpWithEmailAndPassword(
@@ -148,9 +163,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     passowrdcontroller.text.trim().toString(),
                                     nameController.text.trim().toString(),
                                     context);
+                                    setState(() {
+                                      loading=false;
+                                    });
                             Navigator.pop(context);
                             Utils.toastMessage(
-                                "Verification link has been send to your email");
+                                "Login with your email account");
                           } on FirebaseAuthException catch (e) {
                             Utils.toastMessage(e.message!);
                           }
@@ -161,7 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             Positioned(
-                bottom: h / 30,
+                bottom: h / 80,
                 child: Container(
                   width: w,
                   alignment: Alignment.center,
@@ -171,12 +189,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const Text("Already have an accont?"),
                       TextButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
+                            Navigator.pushNamed(
                                 context, RouteNames.emaillogin);
                           },
                           child: Text(
                             "Sign In",
-                            selectionColor: theme.colorScheme.secondary,
+                            style: TextStyle(color: ExternalColors.lightgreen),
                           ))
                     ],
                   ),

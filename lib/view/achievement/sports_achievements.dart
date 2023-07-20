@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sports_application/utils/Routes/route_names.dart';
 import 'package:sports_application/utils/utils.dart';
 import 'package:sports_application/view/achievement/add_achievement.dart';
+import 'package:sports_application/view/complaints/spinkit.dart';
 import 'package:sports_application/view_model/achievement_provider.dart';
 import 'package:sports_application/view_model/profile_provider.dart';
 
@@ -33,9 +34,7 @@ class _SportsAchievementsState extends State<SportsAchievements> {
           child: StreamBuilder(
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return Center(child: LoadingKit.spinkit);
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text('${snapshot.error}'),
@@ -46,97 +45,99 @@ class _SportsAchievementsState extends State<SportsAchievements> {
                 );
               } else if (snapshot.hasData) {
                 final snapshotdata = snapshot.data;
-                if(snapshotdata!.isNotEmpty){
-                 return ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, RouteNames.sportsDetail, arguments: snapshotdata[index]);
-                        },
-                        child: Container(
-                          height: h / 2.2,
-                          width: w / 1.2,
-                          decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10)),
-                              border: Border.all(width: 1)),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius:const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                                child: Image(
-                                  width: w/1.2,
-                                  height: h / 3.5,
-                                  image: snapshotdata[index]['imageUrl']==null?const AssetImage('assets/Images/loadig.jpeg')as ImageProvider:
-                                      NetworkImage(snapshotdata[index]['imageUrl']),
-                                  fit: BoxFit.cover,
+                if (snapshotdata!.isNotEmpty) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RouteNames.sportsDetail,
+                                arguments: snapshotdata[index]);
+                          },
+                          child: Container(
+                            height: h / 1.8,
+                            width: w / 1.2,
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10)),
+                                border: Border.all(width: 1)),
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10)),
+                                  child:snapshotdata[index]['imageUrl']!=null? Image(
+                                    width: w / 1.1,
+                                    height: w/1.1,
+                                    image: NetworkImage(
+                                        snapshotdata[index]['imageUrl']),
+                                    fit: BoxFit.cover,
+                                  ): SizedBox(width: w/1.1, height: w/1.1,child: LoadingKit.imagespinkit),
                                 ),
-                              ),
-                              Container(
-                                width: w / 1.2,
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${snapshotdata[index]['event name']}',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
+                                Container(
+                                  width: w / 1.2,
+                                  padding: const EdgeInsets.only(
+                                    top: 10,
+                                      left: 10,right: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '${snapshotdata[index]['event name']}',
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                     Row(
-                                       children: [
-                                         FittedBox(
-                                              fit: BoxFit.contain,
-                                              child: Text(
-                                                '${snapshotdata[index]['year']}',
-                                                softWrap: false,
-                                                overflow: TextOverflow.fade,
-                                                maxLines: 1,
-                                                style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.grey),
-                                              ),
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          FittedBox(
+                                            fit: BoxFit.contain,
+                                            child: Text(
+                                              '${snapshotdata[index]['year']}',
+                                              softWrap: false,
+                                              overflow: TextOverflow.fade,
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey),
                                             ),
-                                            const Spacer(),
-                                            const Text("Positioin", style: TextStyle(fontWeight: FontWeight.w400),),
-                                            const Spacer(),
-                                            Text('${snapshotdata[index]['position']}🏆')
-                                       ],
-                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      snapshotdata[index]['description'],
-                                      softWrap: false,
-                                      maxLines: 4,
-                                      overflow: TextOverflow.ellipsis,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  itemCount: snapshotdata!.length,
-                );
+                      );
+                    },
+                    itemCount: snapshotdata!.length,
+                  );
+                } else {
+                  return const Center(
+                    child: Text(
+                      "No data!",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  );
                 }
-                else{
-                  return const Center(child: Text("No data!", style: TextStyle(fontSize: 20),),);
-                }
-                
               }
               return const Text("No Data");
             },
