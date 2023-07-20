@@ -3,27 +3,27 @@
 Sports Hub is a Flutter application that serves as a sports community platform for college students of the Institute of Engineering and Technology (IET), Lucknow. It allows users with college email IDs ending with "@ietlucknow.ac.in" to access the app and assigns them roles of either admin or user based on their email ID. The application is backed by Firebase for seamless authentication, real-time database management, and cloud storage.
 
 <h2>Features</h2>
-<h3>1.Login and Role-Based Access:</h3>
+<h3>1. Login and Role-Based Access:</h3>
 
-Users can sign in using their college email IDs (ending with "@ietlucknow.ac.in").
+Users can sign in using their college email IDs (ending with "@ietlucknow.ac.in").<br>
 Role-based access: Admin privileges will be granted to users with specific email IDs, giving them additional features beyond regular users.
-<h3>2.Announcements:</h3>
+<h3>2. Announcements:</h3>
 
-Admins can create and post announcements related to sports events, tournaments, or any important updates.
+Admins can create and post announcements related to sports events, tournaments, or any important updates.<br>
 Users can view these announcements on their dashboard.
-<h3>3.Complaints:</h3>
+<h3>3. Complaints:</h3>
 
-Users can submit complaints or feedback related to the sports facilities, events, or any other issues they encounter.
+Users can submit complaints or feedback related to the sports facilities, events, or any other issues they encounter.<br>
 Admins can manage and respond to these complaints to ensure a smooth sports experience for everyone.
-<h3>4.Group Chat:</h3>
+<h3>4. Group Chat:</h3>
 
-Users can join sports-specific groups based on their interests or participate in group chats related to sports events.
+Users can join sports-specific groups based on their interests or participate in group chats related to sports events.<br>
 Admins have the ability to create, edit, and delete groups as needed.
-<h3>5.Achievement Section:</h3>
+<h3>5. Achievement Section:</h3>
 
-Admins can add achievements and milestones related to sports achievements, academic accomplishments, or any other recognition.
+Admins can add achievements and milestones related to sports achievements, academic accomplishments, or any other recognition.<br>
 Users can view these achievements to celebrate and motivate each other's successes.
-<h36.>User Profiles:</h3>
+<h3>6. User Profiles:</h3>
 
 Each user will have a personalized profile where they can view their information and track their sports-related activities and achievements.
 <h2>Technical Details</h2>
