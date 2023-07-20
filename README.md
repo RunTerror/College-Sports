@@ -2,31 +2,31 @@
 
 Sports Hub is a Flutter application that serves as a sports community platform for college students of the Institute of Engineering and Technology (IET), Lucknow. It allows users with college email IDs ending with "@ietlucknow.ac.in" to access the app and assigns them roles of either admin or user based on their email ID. The application is backed by Firebase for seamless authentication, real-time database management, and cloud storage.
 
-<h3>Features</h3>
-Login and Role-Based Access:
+<h2>Features</h2>
+1. Login and Role-Based Access:
 
 Users can sign in using their college email IDs (ending with "@ietlucknow.ac.in").
 Role-based access: Admin privileges will be granted to users with specific email IDs, giving them additional features beyond regular users.
-Announcements:
+2. Announcements:
 
 Admins can create and post announcements related to sports events, tournaments, or any important updates.
 Users can view these announcements on their dashboard.
-Complaints:
+3. Complaints:
 
 Users can submit complaints or feedback related to the sports facilities, events, or any other issues they encounter.
 Admins can manage and respond to these complaints to ensure a smooth sports experience for everyone.
-Group Chat:
+4. Group Chat:
 
 Users can join sports-specific groups based on their interests or participate in group chats related to sports events.
 Admins have the ability to create, edit, and delete groups as needed.
-Achievement Section:
+5. Achievement Section:
 
 Admins can add achievements and milestones related to sports achievements, academic accomplishments, or any other recognition.
 Users can view these achievements to celebrate and motivate each other's successes.
-User Profiles:
+6. User Profiles:
 
 Each user will have a personalized profile where they can view their information and track their sports-related activities and achievements.
-Technical Details
+<h2>Technical Details</h2>
 The application is developed using the Flutter framework, which ensures cross-platform compatibility for Android and iOS devices.
 Firebase is used as the backend, providing secure and scalable solutions for user authentication, real-time database management with Firestore, and cloud storage for media assets.
 Firebase Authentication ensures that only users with valid "@ietlucknow.ac.in" email IDs can access the application.
