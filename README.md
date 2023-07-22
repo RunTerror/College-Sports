@@ -150,7 +150,19 @@ Contributions to Sports Hub are welcome! If you find any bugs, want to suggest e
 
 ## 📜 License
 
-Sports Hub is open-source and released under the MIT License.
+Sports Hub is open-source and released under the [MIT LICENSE](LICENSE).
+
+## Testing Credentials
+
+### User Credentials
+
+- **User Email:** 1234@ietlucknow.ac.in
+- **Password:** -testuser1-
+
+### Admin Credentials
+
+- **Admin Email:** issac@ietlucknow.ac.in
+- **Password:** -testadmin1-
 
 ---
 Replace `[GitHub Repository URL]` in the Clone the Repository step with the actual URL of your application's repository. Feel free to customize the installation process and add more details as per your application's specific setup.
