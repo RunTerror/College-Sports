@@ -32,8 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
-        child: const Center(
-          child: Text("Splash Screen"),
+        child:  Center(
+          child: Padding(padding: EdgeInsets.symmetric(horizontal: 20),child: Image(image: AssetImage('assets/Images/logo.png'))),
         ),
       ),
     );

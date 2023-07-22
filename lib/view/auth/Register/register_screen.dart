@@ -6,7 +6,6 @@ import 'package:sports_application/resources/Colors/colors.dart';
 import 'package:sports_application/resources/Components/auth_button.dart';
 import 'package:sports_application/resources/Components/auth_password_field.dart';
 import 'package:sports_application/resources/Components/auth_textfield.dart';
-import 'package:sports_application/utils/Routes/route_names.dart';
 import 'package:sports_application/utils/utils.dart';
 
 class RegisterScreen extends StatefulWidget {

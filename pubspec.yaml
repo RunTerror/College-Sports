@@ -69,23 +69,20 @@ dependencies:
   table_calendar: ^3.0.0
   test: ^1.24.1
   flutter_spinkit: ^5.2.0
-  
-
-  
-
-  
-
-dev_dependencies:
-  # flutter_test:
-    # sdk: flutter
   flutter_launcher_icons: ^0.13.1
+  
 
-flutter_icons:
+  
+
+  
+
+
+flutter_launcher_icons:
   android: true
-  ios: true
-  image_path: "web/icons/Icon-512.png"
-  remover_alpha_ios: true
-  adaptive_icon_foreground: "assets/play_store_512.png"
+  # ios: true
+  image_path: "assets/Images/logo.png"
+  # remover_alpha_ios: true
+  adaptive_icon_foreground: "assets/Images/logo.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

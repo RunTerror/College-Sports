@@ -39,7 +39,7 @@ class NewComplaints extends StatelessWidget {
                 return ListView.builder(
                     itemBuilder: (context, index) {
                       var com = waitingComplaints[index];
-                      return Padding(
+                      return (com.complaintId==null || com.day==null || com.desciption==null || com.name==null || com.roll==null || com.sport==null)?SizedBox(child: LoadingKit.spinkit,) :Padding(
                         padding:
                             const EdgeInsets.only(top: 10, left: 20, right: 20),
                         child: InkWell(
@@ -55,7 +55,7 @@ class NewComplaints extends StatelessWidget {
                               sport: com.sport!,
                               subject: com.subject!),
                         ),
-                      );
+                      ) ;
                     },
                     itemCount: waitingComplaints.length);
               }
