@@ -156,7 +156,7 @@ Sports Hub is open-source and released under the [MIT LICENSE](LICENSE).
 
 ### User Credentials
 
-- **User Email:** 1234@ietlucknow.ac.in
+- **User Email:** 2134@ietlucknow.ac.in
 - **Password:** -123456-
 
 ### Admin Credentials
