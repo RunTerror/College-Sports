@@ -157,12 +157,12 @@ Sports Hub is open-source and released under the [MIT LICENSE](LICENSE).
 ### User Credentials
 
 - **User Email:** 2134@ietlucknow.ac.in
-- **Password:** -123456-
+- **Password:** 123456
 
 ### Admin Credentials
 
 - **Admin Email:** abcd@ietlucknow.ac.in
-- **Password:** -123456-
+- **Password:** 123456
 
 ---
 Replace `[GitHub Repository URL]` in the Clone the Repository step with the actual URL of your application's repository. Feel free to customize the installation process and add more details as per your application's specific setup.
